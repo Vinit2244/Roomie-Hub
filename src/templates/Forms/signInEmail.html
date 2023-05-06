@@ -10,20 +10,69 @@
     <div class="form-container">
         <form action="" method="POST">
             {{ form.hidden_tag() }}
-            <div>
-                {{ form.email.label }}
-                {{ form.email }}
+            {{ form.csrf_token }}
+            <fieldset>
+                <div class="form-group">
+                    {{ form.email.label(class="email-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="email-textbox is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="email-textbox") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="pass-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="password-textbox is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="password-textbox") }}
+                    {% endif %}
+                    <div>
+                        <input type="checkbox" class="form-check-input" id="show-password">
+                        <label class="form-check-label" for="show-password">Show Password</label>
+                    </div>
+                </div>
+                <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="signUp-btn") }}
             </div>
-            <div>
-                {{ form.password.label }}
-                {{ form.password }}
-            </div>
-            <div>
-                {{ form.username.label }}
-                {{ form.username }}
-            </div>
+            <small class="text-muted">
+                <a href="#">Forgot Password?</a>
+            </small>
         </form>
+    </div>
+    <div>
+        <small class="text-muted">
+            New User? <a href="{{ url_for('signUp') }}">Sign Up</a>
+        </small>
     </div>
 {% endblock content %}
 
-{% block js %} {% endblock js %}
+{% block js %} 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#show-password').click(function() {
+                if ($(this).is(':checked')) {
+                    $('input[type="password"]').attr('type', 'text');
+                } else {
+                    $('input[type="text"]').attr('type', 'password');
+                }
+            });
+        });
+    </script>
+{% endblock js %}

@@ -13,4 +13,16 @@ Members:
 
 # Do:
     -> pip install flask-wtf
-    -> 
+    -> pip install email_validator
+    -> pip install flask-sqlalchemy
+    -> pip install flask-bcrypt
+    -> pip install flask-login
+
+    # To create/initiate database:
+        -> from app import app, db
+        -> app.app_context().push()
+        -> db.create_all()
+        -> from app import User
+
+    # To delete all the tables and database
+        -> app.drop_all() / db.drop_all()

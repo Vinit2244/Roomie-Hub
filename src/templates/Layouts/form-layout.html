@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- These two css files are required in all webpages -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/form.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/header-footer.css') }}">
+    
+    <!-- Write all the css link tags inside the css block -->
+    {% block css %}{% endblock %}
+    
+    <!-- Write only the title(without the title tag inside the title block) -->
+    <title> {% block title %}{% endblock %} </title>
+</head>
+<body>
+    <!-- Write all the main body content inside the content block -->
+    {% block content %}{% endblock %}
+
+    <!-- Write all the script tags inside the js block -->
+    {% block js %}{% endblock %}
+</body>
+</html>

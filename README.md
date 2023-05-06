@@ -10,3 +10,7 @@ Members:
 
 # How to open our website
     -> Run the app.py python file in src folder
+
+# Do:
+    -> pip install flask-wtf
+    -> 

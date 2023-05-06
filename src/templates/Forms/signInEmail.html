@@ -1,0 +1,29 @@
+{% extends "Layouts/form-layout.html" %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block title %} Sign In {% endblock title %}
+
+{% block content %}
+    <div class="form-container">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.email.label }}
+                {{ form.email }}
+            </div>
+            <div>
+                {{ form.password.label }}
+                {{ form.password }}
+            </div>
+            <div>
+                {{ form.username.label }}
+                {{ form.username }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block js %} {% endblock js %}

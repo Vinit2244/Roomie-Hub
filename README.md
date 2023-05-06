@@ -7,3 +7,6 @@ Members:
     1. Ashwin Kumar
     2. Tanay Gad
     3. Vinit Mehta
+
+# How to open our website
+    -> Run the app.py python file in src folder

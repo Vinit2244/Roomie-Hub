@@ -10,3 +10,8 @@
     height: 500px;
     width: 300px;
 }
+
+.navi-bar div:hover {
+    cursor: pointer;
+    background-color: grey;
+}

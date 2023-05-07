@@ -165,6 +165,7 @@ class SearchForm(FlaskForm):
                         choices=[('CSE', 'CSE'), ('ECE', 'ECE'), ('CSD', 'CSD'), ('CHD', 'CHD'), ('CLD', 'CLD'), ('CND', 'CND'), ('ECD', 'ECD'), ('OTH', 'Others')])
     submit = SubmitField('Search')
     
+    
 # Setup for flask app and database
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1974bf4e181357512bf418984285ad45'
@@ -204,14 +205,9 @@ class User(db.Model, UserMixin):
     roommate_pref2 = db.Column(db.Integer, nullable=False, default=-1)
     roommate_pref3 = db.Column(db.Integer, nullable=False, default=-1)
     
-    # followers = db.relationship('User', backref='added_me', lazy=True)
-    # following = db.relationship('User', backref='i_added', lazy=True)
-    
     def __repr__(self):
         # We are not printing content as it can be very long and the data may look messy
         return f"User('{self.id}', '{self.name}', '{self.username}', '{self.email}', '{self.year}', '{self.course}', '{self.gender}', '{self.profile_photo}', '{self.have_breakfast}', '{self.exercise}', '{self.meditate}', '{self.intro_extro}', '{self.smoke}', '{self.drink}', '{self.present_hostel}', '{self.preferred_hostel}', '{self.password}', '{self.roommate_pref1}', '{self.roommate_pref2}', '{self.roommate_pref3}')"
-
-# SQLITE_DB = "/instance/database.db"
 
 # This function takes argument as a string form of query to be executed > executes the query and returns the result obtained
 # example:
@@ -271,7 +267,6 @@ def signUp():
                     present_hostel=form.present_hostel.data,
                     preferred_hostel=form.preferred_hostel.data,
                     password=hashed_password,
-                    # datetime=form.datetime.data,
                     content=form.content.data)
         db.session.add(user)
         db.session.commit()

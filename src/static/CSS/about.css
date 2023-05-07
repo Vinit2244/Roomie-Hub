@@ -189,31 +189,26 @@ padding-left: 150px; */
     opacity: 1;
 }
 
-
-#song_space {
-    margin-top: 60px;
-    margin-bottom: 40px;
-}
-
-.song-info-name {
-    font-weight: 700;
-    font-size: 27px;
-    margin-top: 5px;
-    margin-bottom: 0px;
-}
-
-.song-info-artist {
-    font-size: 18px;
-    font-weight: 400;
-    margin-top: 0;
-    margin-bottom: 0;
-
-}
-
 .info {
     text-align: center;
 }
 .people{
     margin-top: 20px;
     text-align: center;
+}
+
+.heading {
+    margin-left: 30px;
+    margin-bottom: 50px;
+    padding-left: 30px;
+    font-family: 'Gt super text book', Georgia, sans-serif;
+    font-size: 12em;
+    writing-mode: vertical-rl;
+    transform: scale(-1);
+    color: white;
+}
+
+.outer-about-div {
+    display: flex;
+    flex-direction: row;
 }

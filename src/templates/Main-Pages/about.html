@@ -17,6 +17,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+<style>
+    .container-about {
+        border-top-color: #f9004d;
+        border-top-style: solid;
+        border-top-width: 7px;
+    }
+</style>
 {%endblock css %}
 
 <!-- Write only the title(without the title tag inside the title block) -->
@@ -24,14 +31,18 @@
 
 <!-- Write all the main body content inside the content block -->
 {% block content %}
-<div>
+
+<div class="outer-about-div">
+    <div class="headi">
+        <h1 class="heading">About Us</h1>
+    </div>
+<div class="about-content">
+<!-- <div class='about-us-div'>
     <p class="about-head" id="about-head-id" style="padding-top: 40px;">
         About Us
     </p>
-</div>
-</div>
-</div>
-
+</div> -->
+<br><br><br><br><br><br><br><br>
 <div class="about-text-div">
     <p class="about-text">
 
@@ -93,7 +104,7 @@
             </p>
         </div>
     </div>
-
+</div></div>
 </div>
 
 {% endblock content %}

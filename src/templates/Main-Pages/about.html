@@ -1,20 +1,376 @@
-{% extends "Layouts/main-layout.html" %}
+<!DOCTYPE html>
+<html>
 
-<!-- Write all the css link tags inside the css block -->
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
-{%endblock css %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <style>
+        .logo {
+            width: 300px;
+        }
+
 
 <!-- Write only the title(without the title tag inside the title block) -->
 {% block title %} About {% endblock title %}
 
-<!-- Write all the main body content inside the content block -->
-{% block content %}
+        .logo-div {
+            text-align: center;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
 
-{% endblock content %}
+        body {
+            /* background-image: url('https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover; */
+            background-image: url('/static/Media/main_wp.jpg');
+            background-size:auto;
+        }
 
-<!-- Write all the script tags inside the js block -->
-{% block js %}
+        .containerh {
+            border-top-color: #f9004d;
+            border-top-style: solid;
+            border-top-width: 7px;
+            /* border-left-color: #f9004d;
+    border-left-style: solid;
+    border-left-width: 7px; */
+        }
 
-{% endblock js %}
+        .navi-bar-row {
+            display: flex;
+        }
+
+        .navi-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            z-index: 100;
+            opacity: 0.8;
+            border-radius: 70%;
+            background-color: transparent;
+            right: 0px;
+            margin-right: 30px;
+            top: 0px;
+        }
+
+
+        .navi-bar div {
+            color: white;
+            flex: 1;
+            text-align: center;
+            /* border-radius: 30%; */
+            /* background-color:black; */
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 21px;
+            padding: 10px;
+            /* 
+    padding-left: 150px; */
+            opacity: 0.8;
+            margin-right: 10px;
+            padding: 15px;
+        }
+
+        .navi-bar div:hover {
+            cursor: pointer;
+            background-color: grey;
+        }
+
+        .fa,
+        .head-css,
+        .list-row {
+            color: white;
+        }
+
+        .head-css {
+            text-decoration: none;
+        }
+
+        .drop-profile {
+            display: block;
+
+        }
+
+        .overlay1 {
+            position: absolute;
+            overflow: hidden;
+            bottom: 1;
+            left: auto;
+            right: auto;
+            background-color: black;
+            width: 15%;
+            height: 0;
+            transition: 1s;
+            border-radius: 1000px;
+            opacity: 1 !important;
+        }
+
+        .list-content {
+            width: 170px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            display: block;
+        }
+
+        .your-profile {
+            display: block;
+            background-color: grey;
+            text-align: center;
+            width: 170px;
+        }
+
+        .list-row {
+            width: 170px;
+        }
+
+        #main:hover {
+            background-color: #f9004d;
+        }
+
+        .navi-bar:hover .overlay1 {
+            bottom: 50;
+            height: 40%;
+            opacity: 1;
+        }
+
+        .about-head-div {
+            text-align: center;
+            display: block;
+
+        }
+
+        .about-head {
+            font-size: 80px;
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            margin-left: 480px;
+            margin-bottom: 20px;
+            color: azure;
+        }
+
+        .about-text-div {
+            display: block;
+            text-align: center;
+            background-color: #f9004d;
+            opacity: 0.7;
+            margin-left: 50px;
+            margin-right: 50px;
+            border-radius: 40px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            word-wrap: break-word;
+        }
+
+        .about-text-div:hover {
+            opacity: 0.9;
+            /* color: white; */
+        }
+
+        .about-text {
+            font-size: 26px;
+            /* font-weight:700; */
+            color: black;
+            /* font-family: 'Montserrat', sans-serif; */
+            font-family: 'Instrument Serif', serif;
+            padding-left: 20px;
+            padding-right: 20px;
+            word-wrap:inherit;
+        }
+
+        .img-song {
+            height: 300px;
+            width: 290px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        .song-row {
+            display: inline-block;
+            height: 400px;
+            width: 320px;
+            transition: transform .2s;
+            background-color:grey;
+            opacity: 0.8;
+            border-radius: 10px;
+            margin-right: 100px;
+            margin-left: 100px;
+            margin-bottom: 80px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .song-row:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+        #img-id1,#img-id2,#img-id3,#a1,#a2,#a3,#b1,#b2,#b3{
+            opacity: 1;
+        }
+
+
+        #song_space {
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .song-info-name {
+            font-weight: 700;
+            font-size: 27px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .song-info-artist {
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 0;
+            margin-bottom: 0;
+
+        }
+
+        .info {
+            text-align: center;
+        }
+        .people{
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navi-bar-row">
+        <div class="navi-bar">
+            <a href="">
+                <div class="containerh">
+                    <i class="fa fa-home" style="font-size:36px"></i>
+                    <a class="head-css" href="">Home</a>
+                </div>
+            </a>
+            <a href="">
+                <div class="container" id="search">
+                    <i class="fa fa-search" style="font-size:36px"></i><br>
+                    <a class="head-css" href="">Search</a>
+                </div>
+            </a>
+            <a href="">
+                <div class="container" id="user">
+                    <details class="click-user">
+                        <summary>
+                            <i class="fa fa-user" style="font-size:36px"></i>
+                            <a class="head-css" href="">Profile</a>
+                        </summary>
+                        <div class="list-content" id="main">
+                            <a class="list-row" id="special" href="">Your Profile</a>
+                        </div>
+                        <div class="list-content" id="main">
+                            <a class="list-row" id="special" href="">Logout</a>
+                        </div>
+                        <!-- <li>Logout</li> -->
+                        </ul>
+                    </details>
+
+                </div>
+            </a>
+            <a href="">
+                <div class="container" id="about">
+                    <i class="fa fa-bolt" style="font-size:36px"></i><br>
+                    <a class="head-css" href="">Discover</a>
+                </div>
+            </a>
+            <a href="">
+                <div class="container" id="about">
+                    <i class="fa fa-info-circle" style="font-size:36px"></i><br>
+                    <a class="head-css" href="">About</a>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="logo-div">
+            <img class="logo"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/TinderLogo-2017.svg/2560px-TinderLogo-2017.svg.png">
+            <p class="about-head" id="about-head-id">
+                About Us
+            </p>
+        </div>
+    </div>
+
+    <!-- <div class="about-head-div">
+        <p class="about-head">
+            About Us
+        </p> -->
+    </div>
+
+    <div class="about-text-div">
+        <p class="about-text">
+            
+Looking for a roommate can be a daunting task, but a website that functions like Tinder can make it much easier. With a swipe of a finger, you can find potential roommates in your area who match your lifestyle and preferences. This platform allows you to set up a profile, input your interests, and search for compatible roommates based on their profiles.You can get to know them better before making any commitments. This website simplifies the roommate-finding process and increases your chances of finding a compatible roommate.
+
+        </p>
+    </div>
+
+    <div class="people">
+        <div class="song-row">
+            <div class="song-image">
+                <img class="img-song" id="img-id1" href={{ url_for('static', filename='Media/main_wp.jpg>
+            </div>
+            <div class="info">
+                <p class="song-info-name" id="a1">
+                    Vinit Mehta
+                </p>
+                <p class="song-info-artist" id="b1">
+                    2022111001
+                </p>
+                <p class="song-info-artist" id="b3">
+                    vinit.mehta@research.iiit.ac.in
+                </p>
+            </div>
+        </div>
+        <div class="song-row">
+            <div class="song-image">
+                <img class="img-song" id="img-id2"src="IMG_8607-removebg-preview.png">
+            </div>
+            <div class="info">
+                <p class="song-info-name" id="a2" >
+                    Ashwin Kumar
+                </p>
+                <p class="song-info-artist" id="b2">
+                    2022101091
+                </p>
+                <p class="song-info-artist" id="b3">
+                    ashwin.kumar@students.iiit.ac.in
+                </p>
+            </div>
+        </div>
+        <div class="song-row">
+            <div class="song-image">
+                <img class="img-song" id="img-id3" src="tanay-removebg-preview.png">
+            </div>
+            <div class="info">
+                <p class="song-info-name" id="a3">
+                    Tanay Gad
+                </p>
+                <p class="song-info-artist" id="b3">
+                    2022101043
+                </p>
+                <p class="song-info-artist" id="b3">
+                    tanay.gad@students.iiit.ac.in
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

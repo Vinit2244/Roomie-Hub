@@ -1,0 +1,12 @@
+.cards {
+    /* display: flex;
+    flex-direction: row; */
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.card {
+    display: inline-block;
+    height: 500px;
+    width: 300px;
+}

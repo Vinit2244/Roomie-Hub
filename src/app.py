@@ -10,7 +10,8 @@ from wtforms.widgets import PasswordInput
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-# import sqlite3
+from sqlalchemy import text
+import sqlite3
 
 
 class SignUpForm(FlaskForm):
@@ -24,10 +25,10 @@ class SignUpForm(FlaskForm):
                         choices=[('M', 'Male'), ('F', 'Female')],
                         validators=[DataRequired()])
     year = RadioField('Batch',
-                      choices=[('ug1', 'UG1'), ('ug2', 'UG2'), ('ug3', 'UG3'), ('ug4', 'UG4'), ('pg1', 'PG1'), ('pg2', 'PG2'), ('oth', 'Others')],
+                      choices=[('UG1', 'UG1'), ('UG2', 'UG2'), ('UG3', 'UG3'), ('UG4', 'UG4'), ('PG1', 'PG1'), ('PG2', 'PG2'), ('OTH', 'Others')],
                       validators=[DataRequired()])
     course = RadioField('Course',
-                        choices=[('cse', 'CSE'), ('ece', 'ECE'), ('csd', 'CSD'), ('chd', 'CHD'), ('cld', 'CLD'), ('cnd', 'CND'), ('ecd', 'ECD'), ('oth', 'Others')],
+                        choices=[('CSE', 'CSE'), ('ECE', 'ECE'), ('CSD', 'CSD'), ('CHD', 'CHD'), ('CLD', 'CLD'), ('CND', 'CND'), ('ECD', 'ECD'), ('OTH', 'Others')],
                         validators=[DataRequired()])
     profile_photo = FileField('Profile Image',
                               validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])
@@ -105,10 +106,10 @@ class UpdateForm(FlaskForm):
                         choices=[('M', 'Male'), ('F', 'Female')],
                         validators=[DataRequired()])
     year = RadioField('Batch',
-                      choices=[('ug1', 'UG1'), ('ug2', 'UG2'), ('ug3', 'UG3'), ('ug4', 'UG4'), ('pg1', 'PG1'), ('pg2', 'PG2'), ('oth', 'Others')],
+                      choices=[('UG1', 'UG1'), ('UG2', 'UG2'), ('UG3', 'UG3'), ('UG4', 'UG4'), ('PG1', 'PG1'), ('PG2', 'PG2'), ('OTH', 'Others')],
                       validators=[DataRequired()])
     course = RadioField('Course',
-                        choices=[('cse', 'CSE'), ('ece', 'ECE'), ('csd', 'CSD'), ('chd', 'CHD'), ('cld', 'CLD'), ('cnd', 'CND'), ('ecd', 'ECD'), ('oth', 'Others')],
+                        choices=[('CSE', 'CSE'), ('ECE', 'ECE'), ('CSD', 'CSD'), ('CHD', 'CHD'), ('CLD', 'CLD'), ('CND', 'CND'), ('ECD', 'ECD'), ('OTH', 'Others')],
                         validators=[DataRequired()])
     profile_photo = FileField('Profile Image',
                               validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])
@@ -154,6 +155,19 @@ class UpdateForm(FlaskForm):
                 raise ValidationError('Email already in use!')
     
 
+class SearchForm(FlaskForm):
+    username = StringField('Username')
+    gender = RadioField('Your Gender:',
+                                choices=[('M', 'Male'), ('F', 'Female')],
+                                validators=[DataRequired()])
+    preferred_hostel = RadioField('Preferred Hostel:',
+                                choices=[('bakul', 'Bakul'), ('obh', 'OBH'), ('nbh', 'NBH'), ('new_parijat', 'New Parijat'), ('old_parijat', 'Old Parijat')])
+    year = RadioField('Batch',
+                      choices=[('UG1', 'UG1'), ('UG2', 'UG2'), ('UG3', 'UG3'), ('UG4', 'UG4'), ('PG1', 'PG1'), ('PG2', 'PG2'), ('OTH', 'Others')])
+    course = RadioField('Course',
+                        choices=[('CSE', 'CSE'), ('ECE', 'ECE'), ('CSD', 'CSD'), ('CHD', 'CHD'), ('CLD', 'CLD'), ('CND', 'CND'), ('ECD', 'ECD'), ('OTH', 'Others')])
+    submit = SubmitField('Search')
+    
 # Setup for flask app and database
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1974bf4e181357512bf418984285ad45'
@@ -177,7 +191,7 @@ class User(db.Model, UserMixin):
     year = db.Column(db.String(3), nullable=False)
     course = db.Column(db.String(3), nullable=False)
     gender = db.Column(db.String(1), nullable=False)
-    profile_photo = db.Column(db.String(20), nullable=False, default='Media/profile_pictures/default.jpg')
+    profile_photo = db.Column(db.String(20), nullable=False, default='default.jpg')
     have_breakfast = db.Column(db.String(1), nullable=False)
     exercise = db.Column(db.String(1), nullable=False)
     meditate = db.Column(db.String(1), nullable=False)
@@ -200,25 +214,29 @@ class User(db.Model, UserMixin):
         # We are not printing content as it can be very long and the data may look messy
         return f"User('{self.id}', '{self.name}', '{self.username}', '{self.email}', '{self.year}', '{self.course}', '{self.gender}', '{self.profile_photo}', '{self.have_breakfast}', '{self.exercise}', '{self.meditate}', '{self.intro_extro}', '{self.smoke}', '{self.drink}', '{self.present_hostel}', '{self.preferred_hostel}', '{self.password}', '{self.roommate_pref1}', '{self.roommate_pref2}', '{self.roommate_pref3}')"
 
-# SQLITE_DB = "database.db"
+# SQLITE_DB = "/instance/database.db"
 
 # This function takes argument as a string form of query to be executed > executes the query and returns the result obtained
 # example:
 # query_db("""CREATE TABLE IF NOT EXISTS songs (id, name, img, artist, album, duration, UNIQUE(id));""")
 
-# def query_db(*args, **kw_args):
-#     con = sqlite3.connect(SQLITE_DB)
-#     cur = con.cursor()
-#     result = cur.execute(*args, **kw_args).fetchall()
-#     con.commit()
-#     cur.close()
-#     con.close()
-#     return result
+def query_db(*args, **kw_args):
+    db_path = os.path.join(os.path.dirname(__file__), 'instance', 'database.db')
+    con = sqlite3.connect(db_path)
+    cur = con.cursor()
+    result = cur.execute(*args, **kw_args).fetchall()
+    con.commit()
+    cur.close()
+    con.close()
+    return result
 
-@app.route('/')
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 def home():
-    return render_template('Main-Pages/index.html')
+    if current_user.is_authenticated:
+        return render_template('Main-Pages/index.html')
+    else:
+        return redirect(url_for('signInEmail'))
+    # return render_template('Main-Pages/index.html')
 
 
 def save_profile_picture(form_picture):
@@ -234,7 +252,7 @@ def save_profile_picture(form_picture):
 def signUp():
     form = SignUpForm()
     if form.validate_on_submit():
-        picture_filename = 'Media/profile_pictures/default.jpg'
+        picture_filename = 'default.jpg'
         if form.profile_photo.data:
             temp_picture_filename = save_profile_picture(form.profile_photo.data)
             picture_filename = temp_picture_filename
@@ -264,6 +282,8 @@ def signUp():
         return redirect(url_for('signInEmail'))
     return render_template('Forms/signUp.html', form=form)
 
+
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/signInEmail', methods=['GET', 'POST'])
 def signInEmail():
     form = SignInFormEmail()
@@ -272,7 +292,7 @@ def signInEmail():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            return redirect(next_page) if next_page else render_template('Main-Pages/index.html')
         else:
             flash('Login unsucessful! Please check your credentials!', 'danger')
     return render_template('Forms/signInEmail.html', form=form)
@@ -285,7 +305,13 @@ def logout():
 
 @app.route('/user-info', methods=['GET', 'POST'])
 def user_info():
-    return render_template('Main-Pages/UserInfo.html', user=current_user)
+    pref1 = User.query.filter_by(username=current_user.username).first().roommate_pref1
+    pref2 = User.query.filter_by(username=current_user.username).first().roommate_pref2
+    pref3 = User.query.filter_by(username=current_user.username).first().roommate_pref3
+    user1 = User.query.filter_by(id=pref1).first()
+    user2 = User.query.filter_by(id=pref2).first()
+    user3 = User.query.filter_by(id=pref3).first()
+    return render_template('Main-Pages/UserInfo.html', user=current_user, pref1=user1, pref2=user2, pref3=user3)
 
 
 @app.route('/update', methods=['GET', 'POST'])
@@ -330,7 +356,7 @@ def update():
         form.preferred_hostel.data = current_user.preferred_hostel
         form.content.data = current_user.content
         
-    image_file = url_for('static', filename='Media/profile_pictures/' + current_user.profile_photo)
+    image_file = current_user.profile_photo
     return render_template('Forms/update.html', form=form, image_file=image_file)
 
 # Use create an instance of UpdateForm() for the update page
@@ -356,6 +382,48 @@ def remove_pref_2():
 def remove_pref_3():
     current_user.roommate_pref_3 = -1
     return redirect(url_for('user_info'))
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    form = SearchForm()
+    if form.validate_on_submit():
+        username=form.username.data
+        year=form.year.data
+        preferred_hostel = form.preferred_hostel.data
+        course = form.course.data
+        gender = form.gender.data
+        query_str = f"SELECT * FROM User WHERE gender='{gender}'"
+        if username:
+            query_str += f" AND username='{username}'"
+        if preferred_hostel:
+            query_str += f" AND preferred_hostel='{preferred_hostel}'"
+        if year:
+            query_str += f" AND year='{year}'"
+        if course:
+            query_str += f" AND course='{course}'"
+        query_str += ';'
+        ans = query_db(query_str)
+        # form.username.data = username
+        # form.gender.data = gender
+        # form.preferred_hostel.data = preferred_hostel
+        # form.year.data = year
+        # form.course.data = course
+        return render_template('Main-Pages/search-page.html', form=form, display='t', users=ans)
+    return render_template('Main-Pages/search-page.html', form=form, display='f')
+
+@app.route('/show-all-users', methods=['GET', 'POST'])
+def show_all_users():
+    list_of_users = User.query.all()
+    return render_template('Main-Pages/all-users.html', users=list_of_users)
+
+@app.route('/open-user-profile/<string:username>', methods=['GET', 'POST'])
+def open_user_profile(username):
+    user=User.query.filter_by(username=username).first()
+    return render_template('Main-Pages/other-user.html', user=user)
+
+@app.route('/about', methods=['GET', 'POST'])
+def about():
+    return render_template('Main-Pages/about.html')
     
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,34 @@
+{% extends "Layouts/main-layout.html" %}
+
+<!-- Write all the css link tags inside the css block -->
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/other-user.css') }}">
+{%endblock css %}
+
+<!-- Write only the title(without the title tag inside the title block) -->
+{% block title %} User Profile - {{ user.username }} {% endblock title %}
+
+<!-- Write all the main body content inside the content block -->
+{% block content %}
+    <div class="main-block">
+        <div class="inner-card">
+            <div class="top">
+                <img src="{{ url_for('static', filename='Media/profile_pictures/' + user.profile_photo) }}" alt="">
+                <div class="name-username">
+                    <h1>{{ user.username }}</h1>
+                    <h2>{{ user.name }}</h2>
+                    <h3>{{ user.email }}</h3>
+                </div>
+            </div>
+            <div class="other-details">
+                
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- Write all the script tags inside the js block -->
+{% block js %}
+
+{% endblock js %}

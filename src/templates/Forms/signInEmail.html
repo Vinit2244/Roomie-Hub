@@ -28,17 +28,17 @@
                 <div class="form-group">
                     {{ form.password.label(class="pass-label") }}
                     {% if form.password.errors %}
-                        {{ form.password(class="password-textbox is-invalid") }}
+                        {{ form.password(class="password-textbox is-invalid password-field") }}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="password-textbox") }}
+                        {{ form.password(class="password-textbox password-field") }}
                     {% endif %}
                     <div>
-                        <input type="checkbox" class="form-check-input" id="show-password">
+                        <input type="checkbox" id="show-password">
                         <label class="form-check-label" for="show-password">Show Password</label>
                     </div>
                 </div>
@@ -68,9 +68,9 @@
         $(document).ready(function() {
             $('#show-password').click(function() {
                 if ($(this).is(':checked')) {
-                    $('input[type="password"]').attr('type', 'text');
+                    $('.password-field').attr('type', 'text');
                 } else {
-                    $('input[type="text"]').attr('type', 'password');
+                    $('.password-field').attr('type', 'password');
                 }
             });
         });

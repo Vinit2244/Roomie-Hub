@@ -1,0 +1,100 @@
+{% extends "Layouts/main-layout.html" %}
+
+<!-- Write all the css link tags inside the css block -->
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/user-info.css') }}">
+{%endblock css %}
+
+<!-- Write only the title(without the title tag inside the title block) -->
+{% block title %} <name> - Home Page {% endblock title %}
+
+<!-- Write all the main body content inside the content block -->
+{% block content %}
+    <div class="outer-box">
+        <div class="inner-card">
+            <div class="row others">
+                <div class="profile-image">
+                    <img src="{{ url_for('static', filename='Media/profile_pictures/' + user.profile_photo) }}" alt="">
+                </div>
+                <div class="main-details">
+                    <h1>{{ user.username }}<small>
+                        &NonBreakingSpace;(
+                        {% if user.gender == 'M' %}
+                            Male
+                        {% else %}
+                            Female
+                        {% endif %}
+                        )</small></h1>
+                    <h2>{{ user.name }}</h2>
+                    <h2>{{ user.email }}</h2>
+                </div>
+            </div>
+            <div class="other-details">
+                <div class="row">
+                    <div class="batch">
+                        <h2>Batch:&NonBreakingSpace;&NonBreakingSpace;</h2>
+                        <h2>{{ user.year }}</h2>
+                    </div>
+                    <div class="course">
+                        <h2>Course:&NonBreakingSpace;&NonBreakingSpace;</h2>
+                        <h2>{{ user.course }}</h2>
+                    </div>
+                </div>
+                <div class="side">
+                <div class="hostels">
+                    <h1>Present Hostel:&NonBreakingSpace;&NonBreakingSpace;{{ user.present_hostel }}</h1>
+                    <h1>Preferred Hostel:&NonBreakingSpace;&NonBreakingSpace;{{ user.preferred_hostel }}</h1>
+                    <h1>About You:&NonBreakingSpace;&NonBreakingSpace;{{ user.content }}</h1>
+                </div>
+                <div class="others lifestyle-preferences">
+                    &NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;
+                    LifeStyle Preferences: 
+                    <ul>
+                        <li>Have Breakfast</li>
+                        <li>Exercise</li>
+                        <li>Meditate</li>
+                        <li>
+                            {% if user.intro_extro == "introvert" %}
+                                Introvert
+                            {% else %}
+                                Extrovert
+                            {% endif %}
+                        </li>
+                        <li>Smoke</li>
+                        <li>Drink</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div class="prefs">
+                {% if pref1 or pref2 or pref3 %}
+                    {% if pref1 %}
+                        <div class="pref1">
+                            <img src="" alt="">
+                        </div>
+                    {% endif %}
+                    {% if pref2 %}
+                        <div class="pref2">
+                            <img src="" alt="">
+                        </div>
+                    {% endif %}
+                    {% if pref3 %}
+                        <div class="pref3">
+                            <img src="" alt="">
+                        </div>
+                    {% endif %}
+            </div>
+            {% else %}
+                    <div class="no-following">
+                        <h1>You do not follow anyone</h1>
+                    </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- Write all the script tags inside the js block -->
+{% block js %}
+
+{% endblock js %}

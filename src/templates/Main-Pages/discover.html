@@ -1,352 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "Layouts/main-layout.html" %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/header-footer.css') }}">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
+<!-- Write all the css link tags inside the css block -->
+{% block css %}
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/discover.css') }}">
+<style>
+  .container-discover {
+    border-top-color: #f9004d;
+    border-top-style: solid;
+    border-top-width: 7px;
+  }
+</style>
+{%endblock css %}
 
-    html,
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Nunito', sans-serif;
-      background-color: #edeef3;
-    }
+<!-- Write only the title(without the title tag inside the title block) -->
+{% block title %} RoomieHub - Discover Page {% endblock title %}
 
-    .frame {
-      position: relative;
-      width: 56vh;
-      height: 84vh;
-      max-width: 400px;
-      max-height: 600px;
-      z-index: 1;
-    }
-
-    .icons {
-      margin-top: 3vh;
-      user-select: none;
-      z-index: 1;
-    }
-
-    .icons>svg {
-      width: 10vh;
-      height: 10vh;
-      max-width: 60px;
-      max-height: 60px;
-      border-radius: 50%;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-    }
-
-    .icons>svg:nth-child(1) {
-      fill: #fb4f68;
-      margin-right: 2vh;
-    }
-
-    .icons>svg:nth-child(2) {
-      fill: #4dca93;
-    }
-
-    .icons>svg>path:nth-child(1) {
-      fill: #fff;
-    }
-
-    .card {
-      position: absolute;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      color: #f1f1f1;
-      border-radius: 10px;
-      user-select: none;
-      cursor: pointer;
-      overflow: hidden;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      touch-action: none;
-    }
-
-    .card .is-like {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      opacity: 0;
-    }
-
-    .card .is-like::after {
-      position: absolute;
-      left: 50%;
-      bottom: 30%;
-      transform: translateX(-50%) rotate(-10deg);
-      width: 70%;
-      height: 13%;
-      font-size: 3em;
-      letter-spacing: 0.2em;
-      font-weight: 600;
-      border-radius: 0.15em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card .like::after {
-      content: "YES";
-      color: #4dca93;
-      border: 0.1em solid #4dca93;
-    }
-
-    .card .nope::after {
-      content: "NO";
-      color: #fb4f68;
-      border: 0.1em solid #fb4f68;
-    }
-
-    .card .bottom {
-      width: 100%;
-      height: 25%;
-      background: linear-gradient(to top, #00000080, #00000000);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      padding-left: 7%;
-      font-weight: 400;
-    }
-
-    .card .bottom .title>span:nth-child(1) {
-      font-size: 2em;
-      font-weight: 700;
-      margin-right: 0.2em;
-    }
-
-    .card .bottom .title>span:nth-child(2) {
-      font-size: clamp(13px, 1.5em, 25px);
-    }
-
-    .card .bottom .title>span:nth-child(2)>b {
-      font-size: 0.6em;
-      margin-right: 0.2em;
-    }
-
-    .card .bottom .info {
-      margin: 3% 0 0 2%;
-      font-size: clamp(10px, 1.1em, 20px);
-    }
-
-    @media screen and (max-height: 540px) {
-      .frame {
-        width: 54vh;
-        height: 81vh;
-        font-size: 13px;
-      }
-    }
-
-    @media screen and (max-height: 440px) {
-      .frame {
-        font-size: 8px;
-      }
-    }
-    .container-discover {
-        border-top-color: #f9004d;
-        border-top-style: solid;
-        border-top-width: 7px;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="frame"></div>
-  <div class="icons">
-    <svg id="hate" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128.07 127.89">
-      <path class="a"
-        d="M128.07,64.07c-.5,36.31-28,63.57-64,63.82S-.17,99.33,0,63.29C.17,28.25,29.23-.3,64.43,0A63.88,63.88,0,0,1,128.07,64.07ZM45.32,38.54c-2.44.36-4.63,1.12-6,3.68a6.39,6.39,0,0,0,.94,7.83A143,143,0,0,0,50.42,60.36c2.73,2.48,3.44,4.31.2,7a98.44,98.44,0,0,0-9.52,9.53c-3.62,4-3.66,7.48-.47,10.59,2.82,2.76,7.12,2.54,10.7-.79,3.05-2.83,5.91-5.86,8.85-8.8,2.58-2.57,5.16-2.53,7.73,0,2.83,2.81,5.62,5.67,8.52,8.42,3.87,3.68,8.08,4.08,11,1.15,3.23-3.21,3-6.85-.83-11C83.57,73.21,80.44,70,77.1,67c-2.37-2.13-2.71-3.65-.13-5.91,3.24-2.85,6.15-6.08,9.2-9.15,4.17-4.2,4.66-8,1.45-11.34-2.93-3-7.58-2.61-11.49,1.19-3.34,3.25-6.66,6.52-9.85,9.91-1.64,1.74-2.85,1.73-4.49,0-3.32-3.5-6.84-6.81-10.21-10.26A9,9,0,0,0,45.32,38.54Z" />
-      <path
-        d="M45.32,38.54a9,9,0,0,1,6.26,2.87c3.37,3.45,6.89,6.76,10.21,10.26,1.64,1.73,2.85,1.74,4.49,0,3.19-3.39,6.51-6.66,9.85-9.91C80,38,84.69,37.52,87.62,40.57c3.21,3.34,2.72,7.14-1.45,11.34-3,3.07-6,6.3-9.2,9.15-2.58,2.26-2.24,3.78.13,5.91,3.34,3,6.47,6.24,9.53,9.52,3.87,4.16,4.06,7.8.83,11-2.95,2.93-7.16,2.53-11-1.15-2.9-2.75-5.69-5.61-8.52-8.42-2.57-2.54-5.15-2.58-7.73,0-2.94,2.94-5.8,6-8.85,8.8-3.58,3.33-7.88,3.55-10.7.79-3.19-3.11-3.15-6.6.47-10.59a98.44,98.44,0,0,1,9.52-9.53c3.24-2.72,2.53-4.55-.2-7A143,143,0,0,1,40.28,50.05a6.39,6.39,0,0,1-.94-7.83C40.69,39.66,42.88,38.9,45.32,38.54Z" />
-    </svg>
-    <svg id="like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128.06 127.99">
-      <path class="a"
-        d="M128.06,63.83a63.65,63.65,0,0,1-64,64.16A63.57,63.57,0,0,1,0,64a64,64,0,0,1,128.06-.13ZM96,56.53c0-5.82-3.9-13.3-10.19-16.05-6.9-3-13.67-2.67-19.37,2.82-2,1.9-3.16,1.41-4.93-.17-2.34-2.08-4.86-3.89-8.25-4.24-9.13-.92-15.31,2.3-19.11,10.25-3.89,8.11-2.42,17.27,4,23.34,7.5,7,15.22,13.88,22.77,20.89,2.06,1.92,3.76,2.27,6,.21C74.36,86.7,82,80,89.39,73.09,93.57,69.21,96.06,64.45,96,56.53Z" />
-      <path
-        d="M96,56.53c.08,7.92-2.41,12.68-6.59,16.56C82,80,74.36,86.7,66.93,93.58c-2.23,2.06-3.93,1.71-6-.21-7.55-7-15.27-13.84-22.77-20.89-6.46-6.07-7.93-15.23-4-23.34,3.8-8,10-11.17,19.11-10.25,3.39.35,5.91,2.16,8.25,4.24,1.77,1.58,2.95,2.07,4.93.17,5.7-5.49,12.47-5.84,19.37-2.82C92.08,43.23,96,50.71,96,56.53Z" />
-    </svg>
+<!-- Write all the main body content inside the content block -->
+{% block content %}
+<div class="block">>
+  {% for user in users %}
+  <div class="row">
+    <a href="{{ url_for('open_user_profile', username=user[2]) }}" class="a-tag">
+      <div class="col">
+        <img src="{{ url_for('static', filename='Media/profile_pictures/' + user[7]) }}" alt="" class="image">
+      </div>
+      <div class="col">
+        <h1>{{ user[1] }}</h1>
+        <h2>{{ user[2] }}</h2>
+        <h2>{{ user[15] }}</h2>
+      </div>
+    </a>
   </div>
-  <br><br><br>
-  <footer style="position: fixed;">
-    <a class="social-link social-link--github" id="github" style="padding: 20px;" href="https://github.com/Vinit2244">
-      <svg class="social-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-        <title>
-          github
-        </title>
-        <g class="social-group" fill="none" fill-rule="evenodd">
-          <circle class="social-group__outline" stroke="#000" stroke-width="20" cx="300" cy="300" r="262.5" />
-          <circle class="social-group__inner-circle" fill="#000" cx="300" cy="300" r="252.5" />
-          <path class="social-group__icon"
-            d="M300 150c-82.8348 0-150 68.8393-150 153.817 0 67.9687 42.991 125.558 102.5893 145.9151 7.5 1.4063 10.2455-3.3482 10.2455-7.433 0-3.683-.134-13.3259-.2009-26.183-41.7187 9.308-50.558-20.625-50.558-20.625-6.8304-17.7456-16.6741-22.5-16.6741-22.5-13.5938-9.576 1.0044-9.375 1.0044-9.375 15.067 1.0714 22.9688 15.8705 22.9688 15.8705 13.3929 23.5045 35.0893 16.741 43.6607 12.7902 1.3393-9.9107 5.2232-16.741 9.509-20.558-33.2813-3.884-68.3036-17.076-68.3036-76.0045 0-16.808 5.8259-30.5357 15.4018-41.25-1.5402-3.884-6.6965-19.5536 1.4732-40.7143 0 0 12.5893-4.1518 41.25 15.7366 11.9866-3.4152 24.7768-5.0893 37.567-5.1562 12.7231.067 25.5803 1.741 37.5669 5.1562 28.6607-19.8884 41.183-15.7366 41.183-15.7366 8.1697 21.1607 3.0134 36.8304 1.4733 40.7143 9.5758 10.7812 15.4017 24.509 15.4017 41.25 0 59.0625-35.0892 72.0536-68.5044 75.8705 5.3571 4.7545 10.1785 14.1295 10.1785 28.4598 0 20.558-.2009 37.1652-.2009 42.1875 0 4.0849 2.6786 8.9063 10.3125 7.3661C407.076 429.308 450 371.7187 450 303.817 450 218.8393 382.8348 150 300 150z"
-            fill="#FFF" fill-rule="nonzero" />
-        </g>
-      </svg>
-    </a>
-    <a class="social-link social-link--linkedin" id="linkedin" style="padding: 20px;"
-      href="https://www.linkedin.com/in/vinit-mehta-96138820a/">
-      <svg class="social-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-        <title>
-          linkedin
-        </title>
-        <g class="social-group" fill="none" fill-rule="evenodd">
-          <circle class="social-group__outline" stroke="#000" stroke-width="20" cx="300" cy="300" r="262.5" />
-          <circle class="social-group__inner-circle" fill="#2D76B0" cx="300" cy="300" r="252.5" />
-          <path class="social-group__icon"
-            d="M278.9308 253.1923h43.5769v20.0539h.5923c6.0923-11.5077 20.9-23.6077 43.0692-23.6077 46.0308 0 54.577 30.2923 54.577 69.723v80.2154h-45.4385v-71.1615c0-17.0077-.2539-38.8385-23.6077-38.8385-23.6923 0-27.2462 18.5308-27.2462 37.5693v72.4307h-45.4384l-.0846-146.3846zm-74.1231 0h45.523V399.577h-45.523V253.1923zm22.8461-72.7692c14.5539 0 26.4 11.8461 26.4 26.4 0 14.5538-11.8461 26.4-26.4 26.4-14.6384 0-26.4-11.8462-26.4-26.4 0-14.5539 11.7616-26.4 26.4-26.4z"
-            fill="#000" fill-rule="nonzero" />
-        </g>
-      </svg>
-    </a>
-    <a class="social-link social-link--instagram" id="instagram" style="padding: 20px;"
-      href="https://www.instagram.com/vinitzz._/">
-      <svg class="social-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-        <title>
-          instagram
-        </title>
-        <defs>
-          <linearGradient x1="0%" y1="100%" y2="0%" id="simpleInsta">
-            <stop stop-color="#D72F3F" offset="0%" />
-            <stop stop-color="#4221B9" offset="100%" />
-          </linearGradient>
-        </defs>
-        <g class="social-group" fill="none" fill-rule="evenodd">
-          <circle class="social-group__outline" stroke="#000" stroke-width="20" cx="300" cy="300" r="262.5" />
-          <circle class="social-group__inner-circle social-group__inner-circle--instagram" fill="url(#simpleInsta)"
-            cx="300" cy="300" r="252.5" />
-          <path class="social-group__icon"
-            d="M436.8577 205.4154c-3.6808-9.4808-8.5885-17.5116-16.6192-25.5423-8.0308-8.0308-16.0616-12.9385-25.5423-16.6193-9.1462-3.5692-19.7424-6.023-35.0231-6.6923-15.3923-.6692-20.3-.8923-59.5616-.8923-39.2615 0-44.1692.1116-59.5615.8923-15.3923.6693-25.877 3.1231-35.023 6.6923-9.4808 3.6808-17.5116 8.5885-25.5424 16.6193-8.0308 8.0307-12.9384 16.0615-16.6192 25.5423-3.5692 9.1461-6.023 19.7423-6.6923 35.023-.6693 15.3924-.8923 20.3-.8923 59.5616 0 39.2615.1115 44.1692.8923 59.5615.6692 15.3923 3.123 25.877 6.6923 35.0231 3.6808 9.4808 8.5884 17.5116 16.6192 25.5423 8.0308 8.0308 16.0616 12.9385 25.5423 16.6193 9.1462 3.5692 19.7423 6.023 35.0231 6.6923 15.3923.6692 20.3.8923 59.5615.8923 39.2616 0 44.1693-.1116 59.5616-.8923 15.3923-.6693 25.8769-3.1231 35.023-6.6923 9.4808-3.6808 17.5116-8.5885 25.5424-16.6193 8.0307-8.0307 12.9384-16.0615 16.6192-25.5423 3.5692-9.1461 6.023-19.7423 6.6923-35.023.6692-15.3924.8923-20.3.8923-59.5616 0-39.2615-.1115-44.1692-.8923-59.5615-.6692-15.3923-3.123-25.877-6.6923-35.0231zm-19.2962 152.9192c-.6692 14.0539-3.0115 21.75-5.0192 26.7692-2.5654 6.6924-5.8 11.6-10.8192 16.6193-5.0193 5.0192-9.8154 8.1423-16.6193 10.8192-5.1307 2.0077-12.7153 4.35-26.7692 5.0192-15.2808.6693-19.7423.8923-58.3346.8923s-43.1654-.1115-58.3346-.8923c-14.0539-.6692-21.75-3.0115-26.7692-5.0192-6.6924-2.5654-11.6-5.8-16.6193-10.8192-5.0192-5.0193-8.1423-9.8154-10.8192-16.6193-2.0077-5.1307-4.35-12.7153-5.0192-26.7692-.6693-15.2808-.8923-19.8538-.8923-58.3346s.1115-43.1654.8923-58.3346c.6692-14.0539 3.0115-21.75 5.0192-26.7692 2.5654-6.6924 5.8-11.6 10.8192-16.6193 5.0193-5.0192 9.8154-8.1423 16.6193-10.8192 5.1307-2.0077 12.7153-4.35 26.7692-5.0192 15.2808-.6693 19.8538-.8923 58.3346-.8923s43.1654.1115 58.3346.8923c14.0539.6692 21.75 3.0115 26.7692 5.0192 6.6924 2.5654 11.6 5.8 16.6193 10.8192 5.0192 5.0193 8.1423 9.8154 10.8192 16.6193 2.0077 5.1307 4.35 12.7153 5.0192 26.7692.6693 15.2808.8923 19.8538.8923 58.3346s-.223 43.1654-.8923 58.3346zM300 225.827c-40.9346 0-74.173 33.2385-74.173 74.1731s33.2384 74.173 74.173 74.173 74.173-33.2384 74.173-74.173-33.2384-74.173-74.173-74.173zm0 122.3577c-26.5462 0-48.1846-21.527-48.1846-48.1846 0-26.5462 21.527-48.1846 48.1846-48.1846 26.6577 0 48.1846 21.527 48.1846 48.1846 0 26.5462-21.6384 48.1846-48.1846 48.1846zm77.073-107.9692c-9.548 0-17.2884-7.7403-17.2884-17.2885 0-9.5481 7.7403-17.2884 17.2885-17.2884 9.5481 0 17.2884 7.7403 17.2884 17.2884 0 9.5482-7.7403 17.2885-17.2884 17.2885z"
-            fill="#FFF" fill-rule="nonzero" />
-        </g>
-      </svg>
-    </a>
-    </div>
-    </div>
-    <p style="font-family: Arial, Helvetica, sans-serif; font-size: 20px; padding-top: 10px;">
-      &copy; 2023 | Team: 60 | <a href="url_for('about')" style="color: grey;">about</a>
-    </p>
-    <img src="" alt="" style="height: 40px;">
-  </footer>
-  <script>
-    let imgCount = 0
-    const cloudUrl = 'https://djjjk9bjm164h.cloudfront.net/'
-    var data = [
-      {% for user in users %}
-    { img: '{{ url_for('static', filename="Media/profile_pictures/" + user[7]) }}', name: '{{ user[1] }}', price: '{{ user[4] }}', distance: '{{ user[5] }} - {{ user[15] }}' },
-    {% endfor %}
-];
+  {% endfor %}
+</div>
+</a>
+{% endblock content %}
 
-    const frame = document.body.querySelector('.frame')
-    data.forEach(_data => appendCard(_data))
+<!-- Write all the script tags inside the js block -->
+{% block js %}
 
-    let current = frame.querySelector('.card:last-child')
-    let likeText = current.children[0]
-    let startX = 0, startY = 0, moveX = 0, moveY = 0
-    initCard(current)
-
-    document.querySelector('#like').onclick = () => {
-      moveX = 1
-      moveY = 0
-      complete()
-    }
-    document.querySelector('#hate').onclick = () => {
-      moveX = -1
-      moveY = 0
-      complete()
-    }
-
-    function appendCard(data) {
-      const firstCard = frame.children[0]
-      const newCard = document.createElement('div')
-      newCard.className = 'card'
-      newCard.style.backgroundImage = `url(${data.img})`
-      newCard.innerHTML = `
-          <div class="is-like">LIKE</div>
-          <div class="bottom">
-            <div class="title">
-              <span>${data.name}</span>
-              <span><b>-</b>${data.price}</span>
-            </div>
-            <div class="info">
-              ${data.distance}
-            </div>
-          </div>
-        `
-      if (firstCard) frame.insertBefore(newCard, firstCard)
-      else frame.appendChild(newCard)
-      imgCount++
-    }
-
-    function initCard(card) {
-      card.addEventListener('pointerdown', onPointerDown)
-    }
-
-    function setTransform(x, y, deg, duration) {
-      current.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${deg}deg)`
-      likeText.style.opacity = Math.abs((x / innerWidth * 2.1))
-      likeText.className = `is-like ${x > 0 ? 'like' : 'nope'}`
-      if (duration) current.style.transition = `transform ${duration}ms`
-    }
-
-    function onPointerDown({ clientX, clientY }) {
-      startX = clientX
-      startY = clientY
-      current.addEventListener('pointermove', onPointerMove)
-      current.addEventListener('pointerup', onPointerUp)
-      current.addEventListener('pointerleave', onPointerUp)
-    }
-
-    function onPointerMove({ clientX, clientY }) {
-      moveX = clientX - startX
-      moveY = clientY - startY
-      setTransform(moveX, moveY, moveX / innerWidth * 50)
-    }
-
-    function onPointerUp() {
-      current.removeEventListener('pointermove', onPointerMove)
-      current.removeEventListener('pointerup', onPointerUp)
-      current.removeEventListener('pointerleave', onPointerUp)
-      if (Math.abs(moveX) > frame.clientWidth / 2) {
-        current.removeEventListener('pointerdown', onPointerDown)
-        complete()
-      } else cancel()
-    }
-
-    function complete() {
-      const flyX = (Math.abs(moveX) / moveX) * innerWidth * 1.3
-      const flyY = (moveY / moveX) * flyX
-      setTransform(flyX, flyY, flyX / innerWidth * 50, innerWidth)
-
-      const prev = current
-      const next = current.previousElementSibling
-      if (next) initCard(next)
-      current = next
-      likeText = current.children[0]
-      appendCard(data[imgCount % 4])
-      setTimeout(() => frame.removeChild(prev), innerWidth)
-    }
-
-    function cancel() {
-      setTransform(0, 0, 0, 100)
-      setTimeout(() => current.style.transition = '', 100)
-    }
-  </script>
-</body>
-
-</html>
+{% endblock js %}

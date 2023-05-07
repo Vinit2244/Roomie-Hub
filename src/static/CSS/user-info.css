@@ -23,10 +23,7 @@ small {
 .inner-card {
     display: flex;
     flex-direction: column;
-    /* margin-top: 100px; */
-    /* width: 100%; */
     padding: 20px;
-    /* flex-direction: row-reverse; */
 }
 
 .img-classs{
@@ -124,6 +121,7 @@ ul {
 }
 
 .no-following {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -137,14 +135,18 @@ ul {
     -webkit-backdrop-filter: blur( 4px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
-    /* width: 40em; */
     padding-left: 10px;
     margin-top: 10px;
     padding: 20px;
 }
 
+.prefs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
 
-
+/* 
 .prefs h1 {
     display: flex;
     justify-content: center;
@@ -152,7 +154,7 @@ ul {
     vertical-align: middle;
     font-size: 100px;
     width: 100%;
-}
+} */
 
 .no-following h1 {
     display: flex;
@@ -164,9 +166,27 @@ ul {
 }
 
 .tick {
-    /* margin-top: 10px; */
-    /* padding-top: 10px; */
     margin-left: 20px;
     width: 35px;
     height: 35px;
 }
+
+.update-link {
+    margin-top: 10px;
+    font-size: 25px;
+    width: 230px;
+    padding: 10px;
+    background-color: #f9004f87;
+    padding-left: 89px;
+}
+
+.update-link:hover {
+    background-color: #f9004d;
+}
+
+a { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:focus { text-decoration: none; }
+a:hover, a:active { text-decoration: none; }
+

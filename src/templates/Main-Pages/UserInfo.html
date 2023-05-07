@@ -54,7 +54,7 @@
                 <div class="hostels">
                     <h1>Present Hostel:&NonBreakingSpace;&NonBreakingSpace;{{ user.present_hostel }}</h1>
                     <h1>Preferred Hostel:&NonBreakingSpace;&NonBreakingSpace;{{ user.preferred_hostel }}</h1>
-                    <h1>About You:&NonBreakingSpace;&NonBreakingSpace;{{ user.content }}</h1>
+                    <h1>About You: &NonBreakingSpace;&NonBreakingSpace;{{ user.content }}</h1>
                 </div>
                 <div class="others lifestyle-preferences">
                     &NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;
@@ -136,8 +136,10 @@
                         <h1>You do not follow anyone</h1>
                     </div>
             {% endif %}
-            <a href="{{ url_for('update') }}">Update Account Info?</a>
         </div>
+        <a href="{{ url_for('update') }}">
+            <div class="update-link others">Update Info?</div>
+        </a>
     </div>
 </div>
 {% endblock content %}

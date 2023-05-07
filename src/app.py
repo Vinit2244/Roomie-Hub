@@ -407,7 +407,35 @@ def about():
 @app.route('/discover', methods=['GET', 'POST'])
 def discover():
     users = query_db("SELECT * FROM User;")
-    return render_template('Main-Pages/discover.html', users=users)
+    final_users = []
+    for user in users:
+        if user[2] == current_user.username:
+            continue
+        else:
+            final_users.append(user)
+    return render_template('Main-Pages/discover.html', users=final_users)
     
+
+@app.route('/add_to_following/<string:username>', methods=['GET', 'POST'])
+def add_to_following(username):
+    user = User.query.filter_by(username=username).first()
+    pref1 = current_user.roommate_pref1
+    pref2 = current_user.roommate_pref2
+    pref3 = current_user.roommate_pref3
+    if pref1 and pref2 and pref3:
+        flash('More than 3 people cannot be added!', 'danger')
+        return redirect(url_for('user_info'))
+    else:
+        if not(pref1):
+            current_user.roommate_pref1 = user[0]
+        elif not(pref2):
+            current_user.roommate_pref2 = user[0]
+        else:
+            current_user.rommate_pref3 = user[0]
+        flash('Person added successfully!', 'success')
+        return redirect(url_for('user_info'))
+        
+
+
 if __name__ == '__main__':
     app.run(debug=True)

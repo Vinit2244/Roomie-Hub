@@ -1,24 +1,10 @@
 {% extends "Layouts/form-layout.html" %}
 
 {% block css %}
-    <style>
-        .alert{
-            text-align: center;
-            position: relative;
-            top: 20px;
-            left: 10%;
-            width: 80%;
-            border-radius: 15px;
-            padding: 20px;
-            font-size: 30px;
-            z-index: 0;
-        }
-        .form-container {
-            position: relative;
-            top: 100px;
-            z-index: 0;
-        }
-    </style>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/signin.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/header-footer.css') }}">
+
 {% endblock css %}
 
 {% block title %} Sign In {% endblock title %}
@@ -28,55 +14,61 @@
         <form action="" method="POST">
             {{ form.hidden_tag() }}
             {{ form.csrf_token }}
-            <fieldset>
-                <div class="form-group">
-                    {{ form.email.label(class="email-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="email-textbox is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.email(class="email-textbox") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.password.label(class="pass-label") }}
-                    {% if form.password.errors %}
-                        {{ form.password(class="password-textbox is-invalid password-field") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.password(class="password-textbox password-field") }}
-                    {% endif %}
-                    <div>
-                        <input type="checkbox" id="show-password">
-                        <label class="form-check-label" for="show-password">Show Password</label>
+            <div class="signin-fieldset">
+                <!-- <fieldset> -->
+                    <div class="form-group">
+                        {{ form.email.label(class="email-label") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="email-textbox is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="email-textbox") }}
+                        {% endif %}
                     </div>
-                </div>
-                <div class="form-check">
-                    {{ form.remember(class="form-check-input") }}
-                    {{ form.remember.label(class="form-check-label") }}
-                </div>
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="signUp-btn") }}
+                    <div class="form-group">
+                        {{ form.password.label(class="pass-label") }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="password-textbox is-invalid password-field") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="password-textbox password-field") }}
+                        {% endif %}
+                        <div class="form-check1">
+                            <input type="checkbox" id="show-password">
+                            <label class="form-check-label" for="show-password">Show Password</label>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
+                        <small class="text-muted">
+                            <a href="#">Forgot Password?</a>
+                        </small>
+                    </div>
+                    <div class="signin-signup">
+                        <div class="form-group">
+                            {{ form.submit(class="signUp-btn") }}
+                        </div>
+                        <div>
+                            <small class="text-muted">
+                                New User? <a href="{{ url_for('signUp') }}">Sign Up</a>
+                            </small>
+                        </div>
+                    </div>
+                <!-- </fieldset> -->
             </div>
-            <small class="text-muted">
-                <a href="#">Forgot Password?</a>
-            </small>
+            
         </form>
-        <div>
-            <small class="text-muted">
-                New User? <a href="{{ url_for('signUp') }}">Sign Up</a>
-            </small>
-        </div>
     </div>
+   
 {% endblock content %}
 
 {% block js %} 

@@ -27,8 +27,10 @@ Members:
     # To delete all the tables and database
         -> app.drop_all() / db.drop_all()
         
-     # File structure:
-     .
+
+# File structure:
+``` bash
+.
 ├── README.md
 └── src
     ├── app.py
@@ -99,3 +101,5 @@ Members:
             └── UserInfo.html
 
 11 directories, 57 files
+
+```

@@ -17,7 +17,6 @@ body {
     flex-direction: row;
     position: fixed;
     z-index: 100;
-    opacity: 0.8;
     border-radius: 70%;
     background-color: transparent;
     right: 0px;
@@ -33,7 +32,6 @@ body {
     font-family: 'Times New Roman', Times, serif;
     font-size: 21px;
     padding: 10px;
-    opacity: 0.8;
     margin-right: 10px;
     padding: 15px;
 }
@@ -242,11 +240,6 @@ body {
     border-radius: 10px;
 }
 
-.album-pic:hover {
-    border-radius: 90px;
-    opacity: 0.8;
-}
-
 .first-pic {
     display: inline-block;
     width: 250px;
@@ -358,4 +351,14 @@ body {
 body {
     background-image: url('/static/Media/main_wp.jpg');
     background-size:contain;
+}
+
+.discover-box1 {
+    position: absolute;
+    right: 50px;
+    background-color: #f9004d;
+    width: 100px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
 }

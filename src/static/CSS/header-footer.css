@@ -134,3 +134,7 @@ footer img:hover {
     background-color: grey;
     opacity: 0.5;
 }
+
+.container-home:hover,.container-home:hover, .container-profile:hover, .container-search:hover, .container-discover:hover, .container-about:hover{
+    background-color: #9a2970;
+}

@@ -8,7 +8,9 @@ body {
     border-top-style: solid;
     border-top-width: 7px;
 }
-
+.box-cover{
+    text-align: center;
+}
 .navi-bar {
     flex: 1;
     display: flex;
@@ -214,8 +216,8 @@ body {
 
 .logo-div {
     text-align: center;
-    margin-top: 80px;
-    margin-bottom: 60px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .album-row:hover {

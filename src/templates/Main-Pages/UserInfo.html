@@ -24,7 +24,7 @@
         <div class="inner-card">
             <div class="row others">
                 <div class="profile-image">
-                    <img src="{{ url_for('static', filename='Media/profile_pictures/' + user.profile_photo) }}" alt="">
+                    <img class="img-class" src="{{ url_for('static', filename='Media/profile_pictures/' + user.profile_photo) }}" alt="">
                 </div>
                 <div class="main-details">
                     <h1>{{ user.username }}<small>

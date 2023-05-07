@@ -15,3 +15,12 @@
     cursor: pointer;
     background-color: grey;
 }
+#year.year-radio{
+    list-style: none;
+}
+#course.course-radio{
+    list-style: none;
+}
+.form-group{
+    list-style: none;
+}

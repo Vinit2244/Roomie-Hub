@@ -2,15 +2,16 @@
 
 <!-- Write all the css link tags inside the css block -->
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
-    <style>
-        .container-home {
-            border-top-color: #f9004d;
-            border-top-style: solid;
-            border-top-width: 7px;
-        }
-    </style>
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
+<style>
+    .container-home {
+        border-top-color: #f9004d;
+        border-top-style: solid;
+        border-top-width: 7px;
+    }
+</style>
 {%endblock css %}
 
 <!-- Write only the title(without the title tag inside the title block) -->
@@ -18,13 +19,13 @@
 
 <!-- Write all the main body content inside the content block -->
 {% block content %}
-    <div class="suggestion-div">
-        <p class="suggestion">
-            Suggestions !
-        </p>
-    </div>
+<div class="suggestion-div">
+    <p class="suggestion">
+        Suggestions !
+    </p>
+</div>
 
-
+<div class="box-cover">
     <div class="box">
         <div class="image-row">
             <img class="image"
@@ -79,109 +80,112 @@
 
         <div class="more-info">
             <p class="main-text">
-                24  Male
+                24 Male
             </p>
             <div class="overlay1">
                 <div class="slide-text"> Details </div>
             </div>
         </div>
     </div>
-    <div class="more-div">
-        <a class="more" href="{{ url_for('show_all_users') }}">
-            see more >>
-        </a>
+</div>
+<div class="more-div">
+    <a class="more" href="{{ url_for('show_all_users') }}">
+        discover>>
+    </a>
+</div>
+
+<div class="suggestion-div">
+    <p class="suggestion">
+        Hostels !
+    </p>
+</div>
+
+<div class="album-row">
+    <div class="first-pic">
+        <img class="album-pic"
+            src="https://upload.wikimedia.org/wikipedia/commons/b/bb/IIIT_Hyderabad_Old_Boys_Hostel.webp">
     </div>
 
-    <div class="suggestion-div">
-        <p class="suggestion">
-            Hostels !
+    <div class="name">
+        <p class="album-name">
+            <a href="" style="color:white;text-decoration: none;">OBH</a>
+        </p>
+        <p class="total-songs">
+            4 Floors
+        </p>
+        <p class="time">
+            Boys
         </p>
     </div>
+</div>
 
-    <div class="album-row">
-        <div class="first-pic">
-            <img class="album-pic" src="https://upload.wikimedia.org/wikipedia/commons/b/bb/IIIT_Hyderabad_Old_Boys_Hostel.webp">
-        </div>
-
-        <div class="name">
-            <p class="album-name">
-                <a href="" style="color:white;text-decoration: none;">OBH</a>
-            </p>
-            <p class="total-songs">
-                4 Floors
-            </p>
-            <p class="time">
-                Boys
-            </p>
-        </div>
-    </div>
-
-    <div class="album-row">
-        <div class="first-pic">
-            <img class="album-pic" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/IIIT_hyderabad_Bakul_nivas_2.jpg/1200px-IIIT_hyderabad_Bakul_nivas_2.jpg
+<div class="album-row">
+    <div class="first-pic">
+        <img class="album-pic" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/IIIT_hyderabad_Bakul_nivas_2.jpg/1200px-IIIT_hyderabad_Bakul_nivas_2.jpg
             ">
-        </div>
-        <div class="name">
-            <p class="album-name">
-                <a href="" style="color:white;text-decoration: none;">Bakul Nivas</a>
-            </p>
-            <p class="total-songs">
-                5 Floors
-            </p>
-            <p class="time">
-                Boys
-            </p>
-        </div>
+    </div>
+    <div class="name">
+        <p class="album-name">
+            <a href="" style="color:white;text-decoration: none;">Bakul Nivas</a>
+        </p>
+        <p class="total-songs">
+            5 Floors
+        </p>
+        <p class="time">
+            Boys
+        </p>
+    </div>
+</div>
+
+<div class="album-row">
+    <div class="first-pic">
+        <img class="album-pic"
+            src="https://content.jdmagicbox.com/comp/hyderabad/i2/040pxx40.xx40.180809190053.j3i2/catalogue/bakul-nivas-gachibowli-hyderabad-hostel-for-students-s3vqs9rprf.jpg">
     </div>
 
-    <div class="album-row">
-        <div class="first-pic">
-            <img class="album-pic" src="https://content.jdmagicbox.com/comp/hyderabad/i2/040pxx40.xx40.180809190053.j3i2/catalogue/bakul-nivas-gachibowli-hyderabad-hostel-for-students-s3vqs9rprf.jpg">
-        </div>
+    <div class="name">
+        <p class="album-name">
+            <a href="" style="color:white;text-decoration: none;">NBH</a>
+        </p>
+        <p class="total-songs">
+            3 Floors
+        </p>
+        <p class="time">
+            Boys
+        </p>
+    </div>
+</div>
 
-        <div class="name">
-            <p class="album-name">
-                <a href="" style="color:white;text-decoration: none;">NBH</a>
-            </p>
-            <p class="total-songs">
-                3 Floors
-            </p>
-            <p class="time">
-                Boys
-            </p>
-        </div>
+<div class="album-row">
+    <div class="first-pic">
+        <img class="album-pic" src="https://www.iiit.ac.in/img/hostel1.png">
     </div>
 
-    <div class="album-row">
-        <div class="first-pic">
-            <img class="album-pic" src="https://www.iiit.ac.in/img/hostel1.png">
-        </div>
-
-        <div class="name">
-            <p class="album-name">
-                <a href="" style="color:white;text-decoration: none;">Parijat</a>
-            </p>
-            <p class="total-songs">
-                3 Floors
-            </p>
-            <p class="time">
-                Girls
-            </p>
-        </div>
+    <div class="name">
+        <p class="album-name">
+            <a href="" style="color:white;text-decoration: none;">Parijat</a>
+        </p>
+        <p class="total-songs">
+            3 Floors
+        </p>
+        <p class="time">
+            Girls
+        </p>
     </div>
+</div>
 
-    <div class="overlay1">
-        <div class="your-profile">
-            <p class="drop-text">
-                Your Profile
-            </p>
-        </div>
-        <div class="logout">
-            <p class="drop-text">
-                Logout
-            </p>
-        </div>
+<div class="overlay1">
+    <div class="your-profile">
+        <p class="drop-text">
+            Your Profile
+        </p>
     </div>
+    <div class="logout">
+        <p class="drop-text">
+            Logout
+        </p>
+    </div>
+</div>
 {% endblock content %}
 
 <!-- Write all the script tags inside the js block -->

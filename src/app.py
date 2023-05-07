@@ -1,7 +1,7 @@
 import os
 import secrets
 from datetime import datetime
-from flask import Flask, request, render_template, url_for, flash, redirect
+from flask import Flask, request, render_template, url_for, flash, redirect, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField, FileField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -401,11 +401,6 @@ def search():
             query_str += f" AND course='{course}'"
         query_str += ';'
         ans = query_db(query_str)
-        # form.username.data = username
-        # form.gender.data = gender
-        # form.preferred_hostel.data = preferred_hostel
-        # form.year.data = year
-        # form.course.data = course
         return render_template('Main-Pages/search-page.html', form=form, display='t', users=ans)
     return render_template('Main-Pages/search-page.html', form=form, display='f')
 
@@ -422,6 +417,11 @@ def open_user_profile(username):
 @app.route('/about', methods=['GET', 'POST'])
 def about():
     return render_template('Main-Pages/about.html')
+
+@app.route('/discover', methods=['GET', 'POST'])
+def discover():
+    users = query_db("SELECT * FROM User;")
+    return render_template('Main-Pages/discover.html', users=users)
     
 if __name__ == '__main__':
     app.run(debug=True)

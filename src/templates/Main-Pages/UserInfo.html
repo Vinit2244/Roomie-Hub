@@ -53,18 +53,55 @@
                     &NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;
                     LifeStyle Preferences: 
                     <ul>
-                        <li>Have Breakfast</li>
-                        <li>Exercise</li>
-                        <li>Meditate</li>
+                        <li>
+                            Have Breakfast
+                            {% if user.have_breakfast == 'y' %}
+                                <img src="{{ url_for('static', filename='Media/right.png') }}" alt="" class="tick">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='Media/wrong.png') }}" alt="" class="tick">
+                            {% endif %}
+                        </li>
+                        <li>
+                            Exercise
+                            {% if user.exercise == 'y' %}
+                                <img src="{{ url_for('static', filename='Media/right.png') }}" alt="" class="tick">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='Media/wrong.png') }}" alt="" class="tick">
+                            {% endif %}
+                        </li>
+                        <li>
+                            Meditate
+                            {% if user.meditate == 'y' %}
+                                <img src="{{ url_for('static', filename='Media/right.png') }}" alt="" class="tick">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='Media/wrong.png') }}" alt="" class="tick">
+                            {% endif %}
+                        </li>
                         <li>
                             {% if user.intro_extro == "introvert" %}
                                 Introvert
+                                <img src="{{ url_for('static', filename='Media/right.png') }}" alt="" class="tick">
                             {% else %}
                                 Extrovert
+                                <img src="{{ url_for('static', filename='Media/right.png') }}" alt="" class="tick">
                             {% endif %}
                         </li>
-                        <li>Smoke</li>
-                        <li>Drink</li>
+                        <li>
+                            Smoke
+                            {% if user.smoke == 'y' %}
+                                <img src="{{ url_for('static', filename='Media/right.png') }}" alt="" class="tick">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='Media/wrong.png') }}" alt="" class="tick">
+                            {% endif %}
+                        </li>
+                        <li>
+                            Drink
+                            {% if user.drink == 'y' %}
+                                <img src="{{ url_for('static', filename='Media/right.png') }}" alt="" class="tick">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='Media/wrong.png') }}" alt="" class="tick">
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
             </div>

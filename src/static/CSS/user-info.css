@@ -149,3 +149,11 @@ ul {
     font-size: 100px;
     width: 100%;
 }
+
+.tick {
+    /* margin-top: 10px; */
+    /* padding-top: 10px; */
+    margin-left: 20px;
+    width: 35px;
+    height: 35px;
+}

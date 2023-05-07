@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- These two css files are required in all webpages -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/header-footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="profile-page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+</head>
+<body>
+    <div class="navi-bar-row">
+        <div class="navi-bar">
+            <a href="">
+                <div class="containerh">
+                    <i class="fa fa-home" style="font-size:36px"></i>
+                    <a class="head-css" href="">Home</a>
+                </div>
+            </a>
+            <a href="">
+                <div class="container" id="search">
+                    <i class="fa fa-search" style="font-size:36px"></i><br>
+                    <a class="head-css" href="">Search</a>
+                </div>
+            </a>
+            <a href="">
+                <div class="container" id="user">
+                    <details class="click-user">
+                        <summary>
+                            <i class="fa fa-user" style="font-size:36px"></i>
+                    <a class="head-css"  href="">Profile</a>
+                        </summary>
+                        <div class="list-content" id="main">
+                            <a class="list-row" id="special"href="">Your Profile</a>
+                        </div>
+                        <div class="list-content" id="main">
+                            <a class="list-row"id="special" href="">Logout</a>
+                        </div>
+                            <!-- <li>Logout</li> -->
+                        </ul>
+                    </details>
+                    
+                </div>
+            </a>
+            <a href="">
+                <div class="container" id="about">
+                    <i class="fa fa-info-circle" style="font-size:36px"></i><br>
+                    <a class="head-css" href="">About</a>
+                </div>
+            </a>
+        </div>
+    
+        <div class="overlay1">
+            <div class="your-profile">
+                <p class="drop-text">
+                    Your Profile
+                </p>
+            </div>
+            <div class="logout">
+                <p class="drop-text">
+                    Logout
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="followers-page-body">
+        <div class="followers-details">
+            <div class="followers-pic"><img class="followers-image" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></div>
+            <div class="followers-name">NAME</div>
+            <div class="followers-hostel">HOSTEL</div>
+            <div class="followers-age">AGE</div>
+        </div>
+    </div>
+</body>
+</html>

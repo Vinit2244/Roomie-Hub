@@ -300,10 +300,17 @@ def user_info():
     pref1 = User.query.filter_by(username=current_user.username).first().roommate_pref1
     pref2 = User.query.filter_by(username=current_user.username).first().roommate_pref2
     pref3 = User.query.filter_by(username=current_user.username).first().roommate_pref3
-    user1 = User.query.filter_by(id=pref1).first()
-    user2 = User.query.filter_by(id=pref2).first()
-    user3 = User.query.filter_by(id=pref3).first()
-    return render_template('Main-Pages/UserInfo.html', user=current_user, pref1=user1, pref2=user2, pref3=user3)
+    lst = []
+    if pref1 != -1:
+        p1 = User.query.filter_by(id=pref1).first()
+        lst.append(p1)
+    if pref2 != -1:
+        p2 = User.query.filter_by(id=pref2).first()
+        lst.append(p2)
+    if pref3 != -1:
+        p3 = User.query.filter_by(id=pref3).first()
+        lst.append(p3)
+    return render_template('Main-Pages/UserInfo.html', user=current_user, preffs=lst)
 
 
 @app.route('/update', methods=['GET', 'POST'])
@@ -352,20 +359,20 @@ def update():
     print(form.errors)
     return render_template('Forms/update.html', form=form, image_file=image_file)
 
-@app.route('/remove-pref-1', methods=['GET', 'POST'])
-def remove_pref_1():
-    current_user.roommate_pref_1 = -1
-    return redirect(url_for('user_info'))
+# @app.route('/remove-pref-1', methods=['GET', 'POST'])
+# def remove_pref_1():
+#     current_user.roommate_pref_1 = -1
+#     return redirect(url_for('user_info'))
 
-@app.route('/remove-pref-2', methods=['GET', 'POST'])
-def remove_pref_2():
-    current_user.roommate_pref_2 = -1
-    return redirect(url_for('user_info'))
+# @app.route('/remove-pref-2', methods=['GET', 'POST'])
+# def remove_pref_2():
+#     current_user.roommate_pref_2 = -1
+#     return redirect(url_for('user_info'))
 
-@app.route('/remove-pref-3', methods=['GET', 'POST'])
-def remove_pref_3():
-    current_user.roommate_pref_3 = -1
-    return redirect(url_for('user_info'))
+# @app.route('/remove-pref-3', methods=['GET', 'POST'])
+# def remove_pref_3():
+#     current_user.roommate_pref_3 = -1
+#     return redirect(url_for('user_info'))
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -422,20 +429,37 @@ def add_to_following(username):
     pref1 = current_user.roommate_pref1
     pref2 = current_user.roommate_pref2
     pref3 = current_user.roommate_pref3
-    if pref1 and pref2 and pref3:
+    if pref1 != -1 and pref2 != -1 and pref3 != -1:
         flash('More than 3 people cannot be added!', 'danger')
         return redirect(url_for('user_info'))
+    elif pref1 == user.id or pref2 == user.id or pref3 == user.id:
+        flash("Person already added!", 'info')
+        return redirect(url_for('user_info')) 
     else:
-        if not(pref1):
-            current_user.roommate_pref1 = user[0]
-        elif not(pref2):
-            current_user.roommate_pref2 = user[0]
+        if pref1 == -1:
+            current_user.roommate_pref1 = user.id
+        elif pref2 == -1:
+            current_user.roommate_pref2 = user.id
         else:
-            current_user.rommate_pref3 = user[0]
+            current_user.roommate_pref3 = user.id
+        db.session.commit()
         flash('Person added successfully!', 'success')
         return redirect(url_for('user_info'))
         
 
+@app.route('/remove/<string:username>', methods=['GET', 'POST'])
+def remove(username):
+    user = User.query.filter_by(username=username).first()
+    user_id = user.id
+    if current_user.roommate_pref1 == user_id:
+        current_user.roommate_pref1 = -1
+    elif current_user.roommate_pref2 == user_id:
+        current_user.roommate_pref2 = -1
+    elif current_user.roommate_pref3 == user_id:
+        current_user.roommate_pref3 = -1
+    db.session.commit()
+    flash('Person removed successfully!', 'success')
+    return redirect(url_for('user_info'))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -126,7 +126,7 @@
                                         <h3 class="det">{{ p.year }}</h3>
                                     </div>
                                     <div class="div2">
-                                            <a href="url_for('remove', username=p.username)" class="remove-link">
+                                            <a href="{{ url_for('remove', username=p.username) }}" class="remove-link">
                                                 <div class="remove-link-div">
                                                 Remove
                                             </div>

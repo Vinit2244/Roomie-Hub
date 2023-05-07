@@ -1,48 +1,26 @@
 {% extends "Layouts/main-layout.html" %}
-
+ 
 <!-- Write all the css link tags inside the css block -->
 {% block css %}
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/search.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/signin.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/header-footer.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/signup.css') }}">
-<link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
-
-
     <style>
-
-        form {
-            margin-bottom: 40px;
-        }
-
         .container-search {
             border-top-color: #f9004d;
             border-top-style: solid;
             border-top-width: 7px;
         }
-/* 
-        ul{
-            overflow-x: hidden;
-            white-space: nowrap;
-            height: 1em;
-            width: 100%;
-        } */
 
-        li{
-            display: inline;
+        .form-container {
+            margin-bottom: 30px;
         }
-
     </style>
 {%endblock css %}
-
+ 
 <!-- Write only the title(without the title tag inside the title block) -->
 {% block title %} RoomieHub - Search Page {% endblock title %}
-
+ 
 <!-- Write all the main body content inside the content block -->
 {% block content %}
     <div class="form-container">
@@ -116,7 +94,7 @@
                     {% endif %}
                 </div>
             </fieldset>
-            <div class="form-group">
+            <div class="form-group sbt-btn">
                 {{ form.submit(class="search-btn") }}
             </div>
         </form>
@@ -142,8 +120,8 @@
         {% endif %}
     {% endif %}
 {% endblock content %}
-
+ 
 <!-- Write all the script tags inside the js block -->
 {% block js %}
-
+ 
 {% endblock js %}

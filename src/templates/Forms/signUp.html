@@ -1,6 +1,10 @@
 {% extends "Layouts/form-layout.html" %}
 
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/signin.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/header-footer.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/signup.css') }}">
 
 {% endblock css %}
 
@@ -79,25 +83,16 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.gender.label(class="gender-label") }}
-                    {% if form.gender.errors %}
-                        {{ form.gender(class="gender-radio is-invalid") }}
+                    {{ form.profile_photo.label(class="profile-photo-label") }}
+                    {% if form.profile_photo.errors %}
+                        {{ form.profile_photo(class="profile-photo-uploadbox is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.gender.errors %}
+                            {% for error in form.profile_photo.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.gender(class="gender-radio") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.profile_photo.label(class="profile-photo-label") }}
-                    {{ form.profile_photo(class="form-control-file") }}
-                    {% if form.profile_photo.errors %}
-                        {% for error in form.profile_photo.errors %}
-                            <span class="text-danger">{{ error }}</span><br>
-                        {% endfor %}
+                        {{ form.profile_photo(class="profile-photo-uploadbox") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
@@ -217,46 +212,11 @@
                         {{ form.content(class="content-textbox") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.password.label(class="pass-label") }}
-                    {% if form.password.errors %}
-                        {{ form.password(class="password-textbox is-invalid password field") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.password(class="password-textbox password-field") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.confirm_password.label(class="cnf-pass-label") }}
-                    {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="cnf-password-textbox is-invalid password-field") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.confirm_password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.confirm_password(class="cnf-password-textbox password-field") }}
-                    {% endif %}
-                    <div>
-                        <input type="checkbox" class="form-check-input" id="show-password">
-                        <label class="form-check-label" for="show-password">Show Password</label>
-                    </div>
-                </div>
             </fieldset>
             <div class="form-group">
-                {{ form.submit(class="signUp-btn") }}
+                {{ form.submit(class="Update-btn") }}
             </div>
         </form>
-    </div>
-    <div>
-        <small class="text-muted">
-            Already have an Account? <a href="{{ url_for('signInEmail') }}">Sign In</a>
-        </small>
     </div>
 {% endblock content %}
 
@@ -266,9 +226,9 @@
         $(document).ready(function() {
             $('#show-password').click(function() {
                 if ($(this).is(':checked')) {
-                    $('.password-field').attr('type', 'text');
+                    $('input[type="password"]').attr('type', 'text');
                 } else {
-                    $('.password-field').attr('type', 'password');
+                    $('input[type="text"]').attr('type', 'password');
                 }
             });
         });

@@ -1,19 +1,17 @@
 {% extends "Layouts/form-layout.html" %}
-
+ 
 {% block css %}
+<link rel="stylesheet" type="text/css"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/signin.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/header-footer.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/signup.css') }}">
-<link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
-
-
+ 
 {% endblock css %}
-
+ 
 {% block title %} Sign Up {% endblock title %}
-
+ 
 {% block content %}
     <div class="form-container">
         <form action="" method="POST" enctype="multipart/form-data">
@@ -22,7 +20,7 @@
             <!-- <fieldset> -->
                 <div class="form-group">
                     {{ form.name.label(class="name-label") }}
-
+ 
                     {% if form.name.errors %}
                         {{ form.name(class="name-textbox is-invalid") }}
                         <div class="invalid-feedback">
@@ -187,7 +185,7 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.present_hostel.label(class="present-hostel-dropdown") }}
+                    {{ form.present_hostel.label(class="present-hostel-label") }}
                     {% if form.present_hostel.errors %}
                         {{ form.present_hostel(class="present_hostel-dropdown is-invalid") }}
                         <div class="invalid-feedback">
@@ -267,7 +265,7 @@
         </small>
     </div>
 {% endblock content %}
-
+ 
 {% block js %} 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

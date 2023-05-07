@@ -15,47 +15,54 @@
 </head>
 <body>
     <div class="background-image"></div>
-    <div class="navi-bar">
-        <a href="">
-            <div class="container">
-                <i class="fa fa-home" style="font-size:36px"></i>
-                <a class="head-css" href="{{ url_for('home') }}">Home</a>
-            </div>
-        </a>
-        <a href="">
-            <div class="container" id="search">
-                <i class="fa fa-search" style="font-size:36px"></i><br>
-                <a class="head-css" href="{{ url_for('search') }}">Search</a>
-            </div>
-        </a>
-        <a href="">
-            <div class="container" id="user">
-                <details class="click-user">
-                    <summary>
-                        <i class="fa fa-user" style="font-size:36px"></i>
-                        <a class="head-css" href="">Profile</a>
-                    </summary>
-                    <div class="list-content" id="main">
-                        <a class="list-row" id="special" href="{{ url_for('user_info') }}">Your Profile</a>
-                    </div>
-                    <div class="list-content" id="main">
-                        <a class="list-row" id="special" href="{{ url_for('logout') }}">Logout</a>
-                    </div>
-                    </ul>
-                </details>
-
-            </div>
-        </a>
-        <a href="">
-            <div class="container" id="about">
-                <i class="fa fa-info-circle" style="font-size:36px"></i><br>
-                <a class="head-css" href="{{ url_for('about') }}">About</a>
-            </div>
-        </a>
-    </div>
+    <div class="navi-bar-row">
+        <div class="navi-bar">
+            <a href="{{ url_for('home') }}">
+                <div class="containerh">
+                    <i class="fa fa-home" style="font-size:36px"></i>
+                    <a class="head-css" href="">Home</a>
+                </div>
+            </a>
+            <a href="{{ url_for('search') }}">
+                <div class="container" id="search">
+                    <i class="fa fa-search" style="font-size:36px"></i><br>
+                    <a class="head-css" href="{{ url_for('search') }}">Search</a>
+                </div>
+            </a>
+            <a href="{{ url_for('user_info', username='') }}">
+                <div class="container" id="user">
+                    <details class="click-user">
+                        <summary>
+                            <i class="fa fa-user" style="font-size:36px"></i>
+                            <a class="head-css" href="{{ url_for('user_info') }}">Profile</a>
+                        </summary>
+                        <div class="list-content" id="main">
+                            <a class="list-row" id="special" href="{{ url_for('user_info') }}">Your Profile</a>
+                        </div>
+                        <div class="list-content" id="main">
+                            <a class="list-row" id="special" href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                        </ul>
+                    </details>
+    
+                </div>
+            </a>
+            <a href="{{ url_for('discover') }}">
+                <div class="container" id="discover">
+                    <i class="fa fa-bolt" style="font-size:36px"></i><br>
+                    <a class="head-css" href="{{ url_for('discover') }}">Discover</a>
+                </div>
+            </a>
+            <a href="{{ url_for('about') }}">
+                <div class="container" id="about">
+                    <i class="fa fa-info-circle" style="font-size:36px"></i><br>
+                    <a class="head-css" href="{{ url_for('about') }}">About</a>
+                </div>
+            </a>
+    
+        </div>
     <div class="logo-div">
-        <img class="logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/TinderLogo-2017.svg/2560px-TinderLogo-2017.svg.png">
+        <img class="logo" src="{{ url_for('static', filename='Media/full_logo-no-bg.png') }}">
     </div>
     <!-- Block to display error and success messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}

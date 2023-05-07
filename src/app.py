@@ -357,15 +357,6 @@ def update():
     print(form.errors)
     return render_template('Forms/update.html', form=form, image_file=image_file)
 
-# Use create an instance of UpdateForm() for the update page
-# don't forget to add get and post request to the update page
-
-# @login_required
-# write all the routes here that require a login to access
-
-# image_file = url_for('static', filename='/Media/profile_pictures' + current_user.profile_photo)
-# render_template('<somefile.html>', image_file=image_file)
-
 @app.route('/remove-pref-1', methods=['GET', 'POST'])
 def remove_pref_1():
     current_user.roommate_pref_1 = -1

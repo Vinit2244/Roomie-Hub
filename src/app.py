@@ -359,21 +359,6 @@ def update():
     print(form.errors)
     return render_template('Forms/update.html', form=form, image_file=image_file)
 
-# @app.route('/remove-pref-1', methods=['GET', 'POST'])
-# def remove_pref_1():
-#     current_user.roommate_pref_1 = -1
-#     return redirect(url_for('user_info'))
-
-# @app.route('/remove-pref-2', methods=['GET', 'POST'])
-# def remove_pref_2():
-#     current_user.roommate_pref_2 = -1
-#     return redirect(url_for('user_info'))
-
-# @app.route('/remove-pref-3', methods=['GET', 'POST'])
-# def remove_pref_3():
-#     current_user.roommate_pref_3 = -1
-#     return redirect(url_for('user_info'))
-
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()

@@ -2,8 +2,10 @@
 
 <!-- Write all the css link tags inside the css block -->
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/user-info.css') }}">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/user-info.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
+
 {%endblock css %}
 
 <!-- Write only the title(without the title tag inside the title block) -->
@@ -90,8 +92,10 @@
                         <h1>You do not follow anyone</h1>
                     </div>
             {% endif %}
+            <a href="{{ url_for('update') }}">Update Account Info?</a>
         </div>
     </div>
+</div>
 {% endblock content %}
 
 <!-- Write all the script tags inside the js block -->

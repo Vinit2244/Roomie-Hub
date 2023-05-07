@@ -1,0 +1,101 @@
+/* Footer styles */
+footer {
+    align-items: last baseline;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    position: -webkit-sticky;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
+
+footer img {
+    filter: grayscale(100%);
+}
+
+footer img:hover {
+    filter: grayscale(0%);
+    transform: scale(1);
+}
+
+.wrapper {
+    display: flex;
+    padding-left: 42%;
+    height: 70px;
+    transition: all 0.4s ease-out;
+}
+.wrapper__links {
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
+.social-link--linkedin {
+    color: #2d76b0;
+}
+.social-link--github {
+    color: #000;
+}
+.social-link--instagram {
+    color: #9a2970;
+}
+
+.social-link .social-svg {
+    width: 4.8rem;
+    height: 4.8rem;
+}
+.social-link .social-svg .social-group__icon {
+    fill: #191308;
+    transition: all 0.2s;
+}
+.social-link .social-svg .social-group__inner-circle {
+    fill: transparent;
+    transition: all 0.2s;
+}
+.social-link .social-svg .social-group__outline {
+    stroke: #191308;
+    transform-origin: 50% 50%;
+    transition: all 0.2s;
+}
+.social-link .social-svg:hover .social-group__icon, .social-link .social-svg:active .social-group__icon, .social-link .social-svg:focus .social-group__icon {
+    fill: #fffbfa;
+    transition: all 0.45s;
+}
+.social-link .social-svg:hover .social-group__inner-circle, .social-link .social-svg:active .social-group__inner-circle, .social-link .social-svg:focus .social-group__inner-circle {
+    fill: currentColor;
+    transition: all 0.45s;
+}
+.social-link .social-svg:hover .social-group__inner-circle--instagram, .social-link .social-svg:active .social-group__inner-circle--instagram, .social-link .social-svg:focus .social-group__inner-circle--instagram {
+    fill: url(#simpleInsta) !important;
+}
+.social-link .social-svg:hover .social-group__outline, .social-link .social-svg:active .social-group__outline, .social-link .social-svg:focus .social-group__outline {
+    stroke: currentColor;
+    transform: scale(1.1);
+    transition: all 0.45s;
+}
+
+.alert {
+    text-align: center;
+    position: absolute;
+    top: 250px;
+    left: 10%;
+    width: 80%;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.alert-success{
+    border: green 2px solid;
+    background-color: rgba(0, 128, 0, 0.4);
+}
+
+.alert-danger{
+    border: red 2px solid;
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.alert-info {
+    border: blue 2px solid;
+    background-color: rgba(117, 168, 250, 0.3);
+}

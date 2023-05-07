@@ -102,9 +102,6 @@ class UpdateForm(FlaskForm):
                            validators=[DataRequired(), Length(min=1, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email(), Length(min=1, max=120)])
-    gender = RadioField('Gender',
-                        choices=[('M', 'Male'), ('F', 'Female')],
-                        validators=[DataRequired()])
     year = RadioField('Batch',
                       choices=[('UG1', 'UG1'), ('UG2', 'UG2'), ('UG3', 'UG3'), ('UG4', 'UG4'), ('PG1', 'PG1'), ('PG2', 'PG2'), ('OTH', 'Others')],
                       validators=[DataRequired()])
@@ -339,7 +336,7 @@ def update():
         
         db.session.commit()
         flash('Account Info successfully updated!', 'success')
-        return redirect(url_for('user-info'))
+        return redirect(url_for('user_info'))
     elif request.method == 'GET':
         form.name.data = current_user.name
         form.username.data = current_user.username
@@ -357,6 +354,7 @@ def update():
         form.content.data = current_user.content
         
     image_file = current_user.profile_photo
+    print(form.errors)
     return render_template('Forms/update.html', form=form, image_file=image_file)
 
 # Use create an instance of UpdateForm() for the update page
@@ -416,7 +414,7 @@ def show_all_users():
     list_of_users = User.query.all()
     return render_template('Main-Pages/all-users.html', users=list_of_users)
 
-@app.route('/open-user-profile/<string:username>', methods=['GET', 'POST'])
+@app.route('/open_user_profile/<string:username>', methods=['GET', 'POST'])
 def open_user_profile(username):
     user=User.query.filter_by(username=username).first()
     return render_template('Main-Pages/other-user.html', user=user)

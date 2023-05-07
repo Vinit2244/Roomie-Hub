@@ -188,7 +188,7 @@
         {% if users %}
             <div class="cards">
                 {% for user in users %}
-                <a href="{{ url_for('open_user_profile', username=user.username) }}">
+                <a href="{{ url_for('open_user_profile', username=user[2]) }}">
                     <div class="card">
                         <img src="{{ url_for('static', filename='Media/profile_pictures/' + user[7]) }}" alt="">
                         <h2>{{ user[2] }}</h2>

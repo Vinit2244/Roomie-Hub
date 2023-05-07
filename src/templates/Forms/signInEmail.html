@@ -1,7 +1,24 @@
 {% extends "Layouts/form-layout.html" %}
 
 {% block css %}
-
+    <style>
+        .alert{
+            text-align: center;
+            position: relative;
+            top: 20px;
+            left: 10%;
+            width: 80%;
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 30px;
+            z-index: 0;
+        }
+        .form-container {
+            position: relative;
+            top: 100px;
+            z-index: 0;
+        }
+    </style>
 {% endblock css %}
 
 {% block title %} Sign In {% endblock title %}
@@ -54,11 +71,11 @@
                 <a href="#">Forgot Password?</a>
             </small>
         </form>
-    </div>
-    <div>
-        <small class="text-muted">
-            New User? <a href="{{ url_for('signUp') }}">Sign Up</a>
-        </small>
+        <div>
+            <small class="text-muted">
+                New User? <a href="{{ url_for('signUp') }}">Sign Up</a>
+            </small>
+        </div>
     </div>
 {% endblock content %}
 

@@ -1,79 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- These two css files are required in all webpages -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/header-footer.css') }}">
-    <link rel="stylesheet" type="text/css" href="profile-page.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% extends "Layouts/main-layout.html" %}
 
-    
-</head>
-<body>
-    <div class="navi-bar-row">
-        <div class="navi-bar">
-            <a href="">
-                <div class="containerh">
-                    <i class="fa fa-home" style="font-size:36px"></i>
-                    <a class="head-css" href="">Home</a>
+<!-- Write all the css link tags inside the css block -->
+{% block css %}
+<link rel="stylesheet" type="text/css"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/followers.css') }}">
+<style>
+    .container-followers {
+        border-top-color: #f9004d;
+        border-top-style: solid;
+        border-top-width: 7px;
+    }
+</style>
+{%endblock css %}
+
+<!-- Write only the title(without the title tag inside the title block) -->
+{% block title %} RoomieHub - Followers Page {% endblock title %}
+
+<!-- Write all the main body content inside the content block -->
+{% block content %}
+    {% if followers %}
+        <div class="block">
+            {% for user in followers %}
+            <div class="row">
+            <a href="{{ url_for('open_user_profile', username=user.username) }}" class="a-tag">
+                <div class="col">
+                <img src="{{ url_for('static', filename='Media/profile_pictures/' + user.profile_photo) }}" alt="" class="image">
+                </div>
+                <div class="col">
+                <h1>{{ user.name }}</h1>
+                <h2>{{ user.username }}</h2>
+                <h2>{{ user.preferred_hostel }}</h2>
                 </div>
             </a>
-            <a href="">
-                <div class="container" id="search">
-                    <i class="fa fa-search" style="font-size:36px"></i><br>
-                    <a class="head-css" href="">Search</a>
-                </div>
-            </a>
-            <a href="">
-                <div class="container" id="user">
-                    <details class="click-user">
-                        <summary>
-                            <i class="fa fa-user" style="font-size:36px"></i>
-                    <a class="head-css"  href="">Profile</a>
-                        </summary>
-                        <div class="list-content" id="main">
-                            <a class="list-row" id="special"href="">Your Profile</a>
-                        </div>
-                        <div class="list-content" id="main">
-                            <a class="list-row"id="special" href="">Logout</a>
-                        </div>
-                            <!-- <li>Logout</li> -->
-                        </ul>
-                    </details>
-                    
-                </div>
-            </a>
-            <a href="">
-                <div class="container" id="about">
-                    <i class="fa fa-info-circle" style="font-size:36px"></i><br>
-                    <a class="head-css" href="">About</a>
-                </div>
-            </a>
-        </div>
-    
-        <div class="overlay1">
-            <div class="your-profile">
-                <p class="drop-text">
-                    Your Profile
-                </p>
             </div>
-            <div class="logout">
-                <p class="drop-text">
-                    Logout
-                </p>
-            </div>
+            {% endfor %}
         </div>
-    </div>
-    <div class="followers-page-body">
-        <div class="followers-details">
-            <div class="followers-pic"><img class="followers-image" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></div>
-            <div class="followers-name">NAME</div>
-            <div class="followers-hostel">HOSTEL</div>
-            <div class="followers-age">AGE</div>
+    {% else %}
+        <div class="oops">
+            <img src="{{ url_for('static', filename='Media/oops.png') }}" alt="OOPS!">
+            <h1 class="oops-h1">OOPS! You don't have any followers yet!</h1>
+            <a href="{{ url_for('discover') }}">
+                <div class="dis-btn">
+                    Discover
+                </div>
+            </a>
         </div>
-    </div>
-</body>
-</html>
+    {% endif %}
+{% endblock content %}
+
+<!-- Write all the script tags inside the js block -->
+{% block js %}
+
+{% endblock js %}

@@ -2,21 +2,13 @@
 
 <!-- Write all the css link tags inside the css block -->
 {% block css %}
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/user-info.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
-<style>
-    .container-profile {
-        border-top-color: #f9004d;
-        border-top-style: solid;
-        border-top-width: 7px;
-    }
-</style>
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/user-info.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
 {%endblock css %}
 
 <!-- Write only the title(without the title tag inside the title block) -->
-{% block title %} RoomieHub - Home Page {% endblock title %}
+{% block title %} RoomieHub - Info Page {% endblock title %}
 
 <!-- Write all the main body content inside the content block -->
 {% block content %}
@@ -121,16 +113,17 @@
                                 <div class="cover">
                                     <div class="div1">
                                         <h1 class="det">{{ p.username }}</h1>
-                                        <h2 class="det">{{ p.name }}</h2>
-                                        <h3 class="det">{{ p.email }}</h3>
-                                        <h3 class="det">{{ p.year }}</h3>
                                     </div>
                                     <div class="div2">
-                                            <a href="{{ url_for('remove', username=p.username) }}" class="remove-link">
-                                                <div class="remove-link-div">
-                                                Remove
-                                            </div>
-                                            </a>
+                                        <div class="div3">
+                                            <h2 class="det">{{ p.name }}</h2>
+                                            <h3 class="det">{{ p.email }}</h3>
+                                            <h3 class="det">{{ p.year }}</h3>
+                                        </div>
+                                        <div class="div4">
+                                            <a class="btn btn-danger" href="{{ url_for('remove', username=p.username) }}">
+                                                <i class="fa fa-trash-o fa-lg"></i> Remove </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

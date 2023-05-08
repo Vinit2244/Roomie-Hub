@@ -38,7 +38,6 @@ small {
 .row {
     display: flex;
     flex-direction: row;
-    height: 400px;
 }
 
 h1{
@@ -178,7 +177,7 @@ ul {
 
 .cover {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .div1 {
@@ -187,13 +186,21 @@ ul {
 }
 
 .div2 {
-    align-items: center;
-    padding-right: 20px;
-    padding-top: 90px;
-    justify-content: center;
-    justify-self: center;
-    justify-items: center;
+    display: flex;
+    flex-direction: row;
     width: 100%;
+}
+
+.div3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.div4 {
+    position: absolute;
+    top: 630px;
+    right: 20px;
+    align-self: right;
 }
 
 .remove-link-div {
@@ -254,4 +261,39 @@ a:hover, a:active { text-decoration: none; }
 .profile-photo {
     width: 550px;
     height: 470px;
+}
+
+.container-profile {
+    border-top-color: #f9004d;
+    border-top-style: solid;
+    border-top-width: 7px;
+}
+.btn {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 25px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left: 30px;
 }

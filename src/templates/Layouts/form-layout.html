@@ -41,9 +41,6 @@
               <div class="list-content" id="main">
                 <a class="list-row" id="special" href="{{ url_for('user_info') }}">Your Profile</a>
               </div>
-              <div class="list-content" id="main">
-                <a class="list-row" id="special" href="{{ url_for('logout') }}">Logout</a>
-              </div>
               </ul>
             </details>
           </div>
@@ -54,9 +51,15 @@
             <a class="head-css" href="{{ url_for('discover') }}">Discover</a>
           </div>
         </a>
+        <a href="{{ url_for('followers') }}">
+          <div class="container-followers" id="followers" style="padding-top: 20px;">
+            <i class="fa fa-users" aria-hidden="true" style="margin-bottom: 10px;"></i><br>
+            <a class="head-css" href="{{ url_for('followers') }}">Followers</a>
+          </div>
+        </a>
         <a href="{{ url_for('about') }}">
           <div class="container-about" id="about">
-            <i class="fa fa-info-circle" style="font-size:36px"></i><br>
+            <i class="fa fa-info-circle" style="font-size:36px" style="height: 50px;"></i><br>
             <a class="head-css" href="{{ url_for('about') }}">About</a>
           </div>
         </a>

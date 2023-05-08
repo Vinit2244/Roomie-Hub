@@ -226,10 +226,11 @@ def query_db(*args, **kw_args):
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if current_user.is_authenticated:
-        return render_template('Main-Pages/index.html')
+        next_page = request.args.get('next')
+        return redirect(next_page) if next_page else render_template('Main-Pages/index.html')
     else:
+        flash('You need to first login to access that page', 'danger')
         return redirect(url_for('signInEmail'))
-    # return render_template('Main-Pages/index.html')
 
 
 def save_profile_picture(form_picture):
@@ -297,100 +298,124 @@ def logout():
 
 @app.route('/user-info', methods=['GET', 'POST'])
 def user_info():
-    pref1 = User.query.filter_by(username=current_user.username).first().roommate_pref1
-    pref2 = User.query.filter_by(username=current_user.username).first().roommate_pref2
-    pref3 = User.query.filter_by(username=current_user.username).first().roommate_pref3
-    lst = []
-    if pref1 != -1:
-        p1 = User.query.filter_by(id=pref1).first()
-        lst.append(p1)
-    if pref2 != -1:
-        p2 = User.query.filter_by(id=pref2).first()
-        lst.append(p2)
-    if pref3 != -1:
-        p3 = User.query.filter_by(id=pref3).first()
-        lst.append(p3)
-    return render_template('Main-Pages/UserInfo.html', user=current_user, preffs=lst)
+    if current_user.is_authenticated:
+        pref1 = User.query.filter_by(username=current_user.username).first().roommate_pref1
+        pref2 = User.query.filter_by(username=current_user.username).first().roommate_pref2
+        pref3 = User.query.filter_by(username=current_user.username).first().roommate_pref3
+        lst = []
+        if pref1 != -1:
+            p1 = User.query.filter_by(id=pref1).first()
+            lst.append(p1)
+        if pref2 != -1:
+            p2 = User.query.filter_by(id=pref2).first()
+            lst.append(p2)
+        if pref3 != -1:
+            p3 = User.query.filter_by(id=pref3).first()
+            lst.append(p3)
+        return render_template('Main-Pages/UserInfo.html', user=current_user, preffs=lst)
+    else:
+        flash('You need to first login to access that page', 'danger')
+        return redirect(url_for('signInEmail'))
 
 
 @app.route('/update', methods=['GET', 'POST'])
 def update():
-    form = UpdateForm()
-    if form.validate_on_submit():
-        if form.profile_photo.data:
-            picture_file = save_profile_picture(form.profile_photo.data)
-            current_user.profile_photo = picture_file
+    if current_user.is_authenticated:
+        form = UpdateForm()
+        if form.validate_on_submit():
+            if form.profile_photo.data:
+                picture_file = save_profile_picture(form.profile_photo.data)
+                current_user.profile_photo = picture_file
+                
+            current_user.name = form.name.data
+            current_user.username = form.username.data
+            current_user.email = form.email.data
+            current_user.year = form.year.data
+            current_user.course = form.course.data
+            current_user.have_breakfast = form.have_breakfast.data
+            current_user.exercise = form.exercise.data
+            current_user.meditate = form.meditate.data
+            current_user.intro_extro = form.intro_extro.data
+            current_user.smoke = form.smoke.data
+            current_user.drink = form.drink.data
+            current_user.present_hostel = form.present_hostel.data
+            current_user.preferred_hotel = form.preferred_hostel.data
+            current_user.content = form.content.data
             
-        current_user.name = form.name.data
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        current_user.year = form.year.data
-        current_user.course = form.course.data
-        current_user.have_breakfast = form.have_breakfast.data
-        current_user.exercise = form.exercise.data
-        current_user.meditate = form.meditate.data
-        current_user.intro_extro = form.intro_extro.data
-        current_user.smoke = form.smoke.data
-        current_user.drink = form.drink.data
-        current_user.present_hostel = form.present_hostel.data
-        current_user.preferred_hotel = form.preferred_hostel.data
-        current_user.content = form.content.data
-        
-        db.session.commit()
-        flash('Account Info successfully updated!', 'success')
-        return redirect(url_for('user_info'))
-    elif request.method == 'GET':
-        form.name.data = current_user.name
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-        form.year.data = current_user.year
-        form.course.data = current_user.course
-        form.have_breakfast.data = current_user.have_breakfast
-        form.exercise.data = current_user.exercise
-        form.meditate.data = current_user.meditate
-        form.intro_extro.data = current_user.intro_extro
-        form.smoke.data = current_user.smoke
-        form.drink.data = current_user.drink
-        form.present_hostel.data = current_user.present_hostel
-        form.preferred_hostel.data = current_user.preferred_hostel
-        form.content.data = current_user.content
-        
-    image_file = current_user.profile_photo
-    print(form.errors)
-    return render_template('Forms/update.html', form=form, image_file=image_file)
+            db.session.commit()
+            flash('Account Info successfully updated!', 'success')
+            return redirect(url_for('user_info'))
+        elif request.method == 'GET':
+            form.name.data = current_user.name
+            form.username.data = current_user.username
+            form.email.data = current_user.email
+            form.year.data = current_user.year
+            form.course.data = current_user.course
+            form.have_breakfast.data = current_user.have_breakfast
+            form.exercise.data = current_user.exercise
+            form.meditate.data = current_user.meditate
+            form.intro_extro.data = current_user.intro_extro
+            form.smoke.data = current_user.smoke
+            form.drink.data = current_user.drink
+            form.present_hostel.data = current_user.present_hostel
+            form.preferred_hostel.data = current_user.preferred_hostel
+            form.content.data = current_user.content
+            
+        image_file = current_user.profile_photo
+        print(form.errors)
+        return render_template('Forms/update.html', form=form, image_file=image_file)
+    else:
+        flash('You need to first login to access that page', 'danger')
+        return redirect(url_for('signInEmail'))
+    
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    form = SearchForm()
-    if form.validate_on_submit():
-        username=form.username.data
-        year=form.year.data
-        preferred_hostel = form.preferred_hostel.data
-        course = form.course.data
-        gender = form.gender.data
-        query_str = f"SELECT * FROM User WHERE gender='{gender}'"
-        if username:
-            query_str += f" AND username='{username}'"
-        if preferred_hostel:
-            query_str += f" AND preferred_hostel='{preferred_hostel}'"
-        if year:
-            query_str += f" AND year='{year}'"
-        if course:
-            query_str += f" AND course='{course}'"
-        query_str += ';'
-        ans = query_db(query_str)
-        return render_template('Main-Pages/search-page.html', form=form, display='t', users=ans)
-    return render_template('Main-Pages/search-page.html', form=form, display='f')
+    if current_user.is_authenticated:
+        form = SearchForm()
+        if form.validate_on_submit():
+            username=form.username.data
+            year=form.year.data
+            preferred_hostel = form.preferred_hostel.data
+            course = form.course.data
+            gender = form.gender.data
+            query_str = f"SELECT * FROM User WHERE gender='{gender}'"
+            if username:
+                query_str += f" AND username='{username}'"
+            if preferred_hostel:
+                query_str += f" AND preferred_hostel='{preferred_hostel}'"
+            if year:
+                query_str += f" AND year='{year}'"
+            if course:
+                query_str += f" AND course='{course}'"
+            query_str += ';'
+            ans = query_db(query_str)
+            return render_template('Main-Pages/search-page.html', form=form, display='t', users=ans)
+        return render_template('Main-Pages/search-page.html', form=form, display='f')
+    else:
+        flash('You need to first login to access that page', 'danger')
+        return redirect(url_for('signInEmail'))
+    
 
 @app.route('/show-all-users', methods=['GET', 'POST'])
 def show_all_users():
-    list_of_users = User.query.all()
-    return render_template('Main-Pages/all-users.html', users=list_of_users)
+    if current_user.is_authenticated:
+        list_of_users = User.query.all()
+        return render_template('Main-Pages/all-users.html', users=list_of_users)
+    else:
+        flash('You need to first login to access that page', 'danger')
+        return redirect(url_for('signInEmail'))
+    
 
 @app.route('/open_user_profile/<string:username>', methods=['GET', 'POST'])
 def open_user_profile(username):
-    user=User.query.filter_by(username=username).first()
-    return render_template('Main-Pages/other-user.html', user=user)
+    if current_user.is_authenticated:
+        user=User.query.filter_by(username=username).first()
+        return render_template('Main-Pages/other-user.html', user=user)
+    else:
+        flash('You need to first login to access that page', 'danger')
+        return redirect(url_for('signInEmail'))
+    
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
@@ -398,14 +423,18 @@ def about():
 
 @app.route('/discover', methods=['GET', 'POST'])
 def discover():
-    users = query_db("SELECT * FROM User;")
-    final_users = []
-    for user in users:
-        if user[2] == current_user.username:
-            continue
-        else:
-            final_users.append(user)
-    return render_template('Main-Pages/discover.html', users=final_users)
+    if current_user.is_authenticated:
+        users = query_db("SELECT * FROM User;")
+        final_users = []
+        for user in users:
+            if user[2] == current_user.username:
+                continue
+            else:
+                final_users.append(user)
+        return render_template('Main-Pages/discover.html', users=final_users)
+    else:
+        flash('You need to first login to access that page', 'danger')
+        return redirect(url_for('signInEmail'))
     
 
 @app.route('/add_to_following/<string:username>', methods=['GET', 'POST'])
@@ -446,5 +475,21 @@ def remove(username):
     flash('Person removed successfully!', 'success')
     return redirect(url_for('user_info'))
 
+
+
+@app.route('/followers', methods=['GET', 'POST'])
+def followers():
+    if current_user.is_authenticated:
+        list_of_followers = []
+        users = User.query.all()
+        for user in users:
+            if current_user.id in [user.roommate_pref1, user.roommate_pref2, user.roommate_pref3]:
+                list_of_followers.append(user)
+        return render_template('Main-Pages/followers.html', followers = list_of_followers)
+    else:
+        flash('You need to first login to access that page', 'danger')
+        return redirect(url_for('signInEmail'))
+    
+    
 if __name__ == '__main__':
     app.run(debug=True)

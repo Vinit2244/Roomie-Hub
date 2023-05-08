@@ -1,14 +1,19 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
 .form-container{
     display:flex;
     justify-content: center;
     text-align: center;
     margin-top: 0px;
-    
 }
 
 .signin-fieldset{
+    padding: 30px;
     text-align: right;   
-    padding: 10px;
+    /* padding: 10px; */
     background-color: white; 
     border-radius: 10px;
 }
@@ -41,16 +46,25 @@
 }
 .email-textbox{
     font-size: 20px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid black;
 }
 .password-textbox {
     font-size: 20px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid black;
+    margin-bottom: 20px;
 }
 .signin-signup{
     text-align: center;
 }
 .signUp-btn{
     font-size: 20px;
-    background-image: linear-gradient(to right, red, rgb(143, 4, 4));
+    background-image: linear-gradient(to right, #f9004d, #f690b1);
     height: 40px;
     width: 120px;
     border-width:0px;
@@ -58,7 +72,7 @@
 }
 .signUp-btn:hover{
     font-size: 20px;
-    background-image: linear-gradient(to bottom right, red, rgb(143, 4, 4));
+    background-image: linear-gradient(to bottom right, #f690b1, #f9004d);
     border-radius: 15px;
     border-width:0px;
     cursor: pointer;

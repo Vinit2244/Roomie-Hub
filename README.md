@@ -32,6 +32,21 @@ ROOMIEHUB
     -> flask_bcrypt
     -> flask_login
     -> sqlalchemy
+    
+# Features Implemented
+    -> Signin/Signup: 
+        Create an account with a unique username and email with the required details.
+        Password is initially hidden and can be seen using show password.
+    -> Search:  
+        Search based on username, and add filters on a variety of parameters.
+    -> Profile Page:
+        Displays you profile with an option to change details and the people you are are following.
+        You can remove people you are following from here.
+    -> Followers page:
+        Displays people who you follow.
+    -> Discover page:
+        List of all the users who have registered. 
+        
 
 # To create/initiate database run the following command on python inside the shell in the src folder:
     -> from app import app, db

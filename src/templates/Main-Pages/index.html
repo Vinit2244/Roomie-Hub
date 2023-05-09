@@ -11,6 +11,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
         border-top-style: solid;
         border-top-width: 7px;
     }
+    .image {
+        width: 500px;
+        height: 500px;
+    }
+    .image-box {
+        padding-top: 20px;
+        height: 500px;
+    }
+    .suggestion {
+        background-color: #f9004f83;
+        font-size: 60px;
+        padding: 30px;
+        padding-left: 20px;
+        margin-bottom: 20px;
+    }
 </style>
 {%endblock css %}
 
@@ -26,67 +41,32 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 </div>
 
 <div class="box-cover">
-    <div class="box">
-        <div class="image-row">
-            <img class="image"
-                src="https://img.freepik.com/free-photo/young-man-with-beard-round-glasses_273609-6994.jpg?w=2000">
-        </div>
+    {% for user in users %}
+    <a href="{{ url_for('open_user_profile', username=user[2]) }}">
+        <div class="box">
+            <div class="image-row">
+                <div class="image-box">
+                    <img class="image"
+                    src="{{ url_for('static', filename='Media/profile_pictures/' + user[7]) }}">
+                </div>
+            </div>
 
-        <div class="details">
-            <a class="info-artist">Jack Smith</a>
-        </div>
+            <div class="details">
+                <a class="info-artist">{{ user[1] }}</a>
+            </div>
 
-        <div class="more-info">
-            <p class="main-text">
-                26 Male
-            </p>
-            <div class="overlay1">
-                <div class="slide-text"> Details </div>
+            <div class="more-info">
+                <p class="main-text">
+                    {{ user[4] }} {{ user[5] }}
+                </p>
+                <div class="overlay1">
+                    <div class="slide-text"> Details </div>
+                </div>
             </div>
         </div>
+    </a>
+    {% endfor %}
 
-
-    </div>
-
-    <div class="box">
-        <div class="image-row">
-            <img class="image"
-                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80">
-        </div>
-
-        <div class="details">
-            <a class="info-artist">Taylor Johnson</a>
-        </div>
-
-        <div class="more-info">
-            <p class="main-text">
-                20 Girl
-            </p>
-            <div class="overlay1">
-                <div class="slide-text"> Details </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="box">
-        <div class="image-row">
-            <img class="image"
-                src="https://lh5.googleusercontent.com/nWlj4rkanGCWf5ZrBGyE1eysgWbQ2LdLdYtrICQLYbWmbAkzG-2G0G8Zs0dCBHuxMLx9RPjMZW109Ov4ZCALbMYMKq6wD_OeL3t476XQCDzTlfWjzgP3AFyvUDDKp2z0fvwC5tTcm73jhbafhFLUbA">
-        </div>
-
-        <div class="details">
-            <a class="info-artist">Andy Morphe</a>
-        </div>
-
-        <div class="more-info">
-            <p class="main-text">
-                24 Male
-            </p>
-            <div class="overlay1">
-                <div class="slide-text"> Details </div>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="more-div">
     <a class="more" href="{{ url_for('discover') }}">

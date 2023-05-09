@@ -3,6 +3,54 @@
     margin: 0px;
 }
 
+.form-check-input, .form-check-label {
+    margin-top: 20px;
+}
+
+.cnf-pass-label {
+    font-size: 20px;
+}
+
+.sign-in-div {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.sign-in-box {
+    font-size: 20px;
+    margin-left: 630px;
+    color: white;
+}
+
+.sign-in-a { 
+    text-decoration: none;
+    color: #f9004d;
+}
+.sign-in-a:visited { 
+    text-decoration: none;
+    color: #f9004d;
+ }
+ .sign-in-a:hover { 
+    text-decoration: none;
+    color: #f9004d;
+ }
+ .sign-in-a:focus { 
+    text-decoration: none;
+    color: #f9004d;
+ }
+ .sign-in-a:hover, .sign-in-a:active { 
+    text-decoration: none;
+    color: #f9004d;
+ }
+
+.cnf-password-textbox {
+    font-size: 20px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: black solid;
+    width: 200px;
+}
 
 .background-image {
     position: fixed;

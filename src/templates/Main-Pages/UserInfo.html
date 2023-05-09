@@ -108,6 +108,7 @@
                 {% if preffs %}
                     <div class="prefs">
                         {% for p in preffs %}
+                        <a href="{{ url_for('open_user_profile', username=p.username) }}">
                             <div class="preff">
                                 <img src="{{ url_for('static', filename='Media/profile_pictures/' + p.profile_photo) }}" alt="" class="profile-photo">
                                 <div class="cover">
@@ -127,6 +128,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </a>
                         {% endfor %}
                     </div>
                 {% else %}
@@ -135,9 +137,10 @@
                         </div>
                 {% endif %}
         </div>
-        <a href="{{ url_for('update') }}">
+        <a href="{{ url_for('update') }}" class="update-btn-a">
             <div class="update-link others">Update Info?</div>
         </a>
+        <br>
     </div>
 </div>
 {% endblock content %}

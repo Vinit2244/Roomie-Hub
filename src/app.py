@@ -75,6 +75,22 @@ class SignUpForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Email already in use!')
+        
+    def validate_hostel1(self, present_hostel, gender):
+        if gender.data == "M":
+            if present_hostel.data in ['old_parijat', 'new_parijat']:
+                raise ValidationError('Boys cannot accomodate girls hostel!')
+        else:
+            if present_hostel.data in ['bakul', 'obh', 'nbh']:
+                raise ValidationError('Girls cannot accomodate Boys hostel!')
+            
+    def validate_hostel2(self, preferred_hostel, gender):
+        if gender.data == "M":
+            if preferred_hostel.data in ['old_parijat', 'new_parijat']:
+                raise ValidationError('Boys cannot accomodate girls hostel!')
+        else:
+            if preferred_hostel.data in ['bakul', 'obh', 'nbh']:
+                raise ValidationError('Girls cannot accomodate Boys hostel!')
     
     
 class SignInFormEmail(FlaskForm):
@@ -150,6 +166,22 @@ class UpdateForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('Email already in use!')
+            
+    def validate_hostel(self, present_hostel, gender):
+        if gender.data == "M":
+            if present_hostel.data in ['old_parijat', 'new_parijat']:
+                raise ValidationError('Boys cannot accomodate girls hostel!')
+        else:
+            if present_hostel.data in ['bakul', 'obh', 'nbh']:
+                raise ValidationError('Girls cannot accomodate Boys hostel!')
+            
+    def validate_hostel(self, preferred_hostel, gender):
+        if gender.data == "M":
+            if preferred_hostel.data in ['old_parijat', 'new_parijat']:
+                raise ValidationError('Boys cannot accomodate girls hostel!')
+        else:
+            if preferred_hostel.data in ['bakul', 'obh', 'nbh']:
+                raise ValidationError('Girls cannot accomodate Boys hostel!')
     
 
 class SearchForm(FlaskForm):
@@ -164,6 +196,22 @@ class SearchForm(FlaskForm):
     course = RadioField('Course',
                         choices=[('CSE', 'CSE'), ('ECE', 'ECE'), ('CSD', 'CSD'), ('CHD', 'CHD'), ('CLD', 'CLD'), ('CND', 'CND'), ('ECD', 'ECD'), ('OTH', 'Others')])
     submit = SubmitField('Search')
+    
+    def validate_hostel(self, present_hostel, gender):
+        if gender.data == "M":
+            if present_hostel.data in ['old_parijat', 'new_parijat']:
+                raise ValidationError('Boys cannot accomodate girls hostel!')
+        else:
+            if present_hostel.data in ['bakul', 'obh', 'nbh']:
+                raise ValidationError('Girls cannot accomodate Boys hostel!')
+            
+    def validate_hostel(self, preferred_hostel, gender):
+        if gender.data == "M":
+            if preferred_hostel.data in ['old_parijat', 'new_parijat']:
+                raise ValidationError('Boys cannot accomodate girls hostel!')
+        else:
+            if preferred_hostel.data in ['bakul', 'obh', 'nbh']:
+                raise ValidationError('Girls cannot accomodate Boys hostel!')
     
     
 # Setup for flask app and database
@@ -227,7 +275,8 @@ def query_db(*args, **kw_args):
 def home():
     if current_user.is_authenticated:
         next_page = request.args.get('next')
-        return redirect(next_page) if next_page else render_template('Main-Pages/index.html')
+        users = query_db("SELECT * FROM User;")[-3::]
+        return redirect(next_page) if next_page else render_template('Main-Pages/index.html', users=users)
     else:
         flash('You need to first login to access that page', 'danger')
         return redirect(url_for('signInEmail'))
@@ -285,7 +334,8 @@ def signInEmail():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else render_template('Main-Pages/index.html')
+            users = query_db("SELECT * FROM User;")[-3::]
+            return redirect(next_page) if next_page else render_template('Main-Pages/index.html', users=users)
         else:
             flash('Login unsucessful! Please check your credentials!', 'danger')
     return render_template('Forms/signInEmail.html', form=form)

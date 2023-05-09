@@ -19,6 +19,20 @@ ROOMIEHUB
     -> pip install flask-bcrypt
     -> pip install flask-login
 
+# Packages Used
+    -> os
+    ->secrets
+    ->flask
+    ->flask_wtf
+    ->wtforms
+    ->wtforms.validators
+    ->flask_wtf.file
+    ->wtforms.widgets
+    ->flask_sqlalchemy
+    ->flask_bcrypt
+    ->flask_login
+    ->sqlalchemy
+
 # To create/initiate database run the following command on python inside the shell in the src folder:
     -> from app import app, db
     -> app.app_context().push()

@@ -1,7 +1,5 @@
 .cards {
     padding-top: 30px;
-    /* display: flex;
-    flex-direction: row; */
     white-space: nowrap;
     overflow: auto;
 }
@@ -20,8 +18,6 @@
     width: 300px;
     padding-right: 20px;
     padding-left: 20px;
-
-
     border-radius: 20px;
     margin-top: 10px;
     margin-bottom: 40px;
